@@ -1,0 +1,249 @@
+@startuml modeling
+scale 1.00
+skinparam ClassBackgroundColor White
+skinparam ClassBorderColor Black
+skinparam ClassAttributeIconSize 0
+skinparam ClassFontStyle Bold
+skinparam ClassFontSize 12
+skinparam ClassAttributeFontSize 12
+skinparam NoteBackgroundColor White
+skinparam NoteBorderColor Black
+skinparam ArrowColor Black
+skinparam Shadowing False
+skinparam LineType Ortho
+hide Circle
+hide Empty Members
+
+entity user {
+  **id**: UUID <<pk>>
+  --
+  name: varchar(100)
+  email: varchar(254) <<unique>>
+  password: varchar(255)
+  created_at: timestamp
+}
+
+entity role {
+  **id**: UUID <<pk>>
+  --
+  name: varchar(100)
+}
+
+entity user_role {
+  <i>**user**</i>: UUID <<fk>>
+  <i>**role**</i>: UUID <<fk>>
+}
+
+entity teacher {
+  **id**: UUID <<pk>>
+  --
+  name: varchar(100)
+  email: varchar(254)
+  telephone: varchar(11)
+}
+
+entity timetable {
+  **id**: SERIAL <<pk>>
+  --
+  dow: int
+  start: time
+  end: time
+}
+
+entity event_type {
+  **id**: SERIAL <<pk>>
+  --
+  name: varchar(100)
+}
+
+entity event_specification {
+  **id**: SERIAL <<pk>>
+  --
+  <i>event_type</i>: int <<fk>>
+  name: varchar(100)
+}
+
+entity event_option {
+  **id**: SERIAL <<pk>>
+  --
+  <i>event_specification</i>: int <<fk>>
+  name: varchar(100)
+}
+
+entity event {
+  **id**: UUID <<pk>>
+  --
+  title: varchar(100)
+  description: text
+  <i>event_type</i>: int <<fk>>
+  created_at: timestamp
+  <i>created_by</i>: UUID <<fk>>
+  <i>updated_by</i>: UUID <<fk>>
+  updated_at: timestamp
+}
+
+entity event_revision {
+  **id**: UUID <<pk>>
+  --
+  <i>event</i>: UUID <<fk>>
+  <i>requested_by</i>: UUID <<fk>>
+  message: text
+  status: varchar(20)
+  created_at: timestamp
+  <i>reviewed_by</i>: UUID <<fk>>
+  reviewed_at: timestamp
+}
+
+entity discipline {
+  **id**: SERIAL <<pk>>
+  --
+  name: varchar(100)
+  <i>teacher</i>: UUID <<fk>>
+}
+
+entity location {
+  **id**: SERIAL <<pk>>
+  --
+  name: varchar(200)
+  type: varchar(50)
+  <i>parent_id</i>: int <<fk>>
+  normalized_name: varchar(200)
+}
+
+entity schedule {
+  **id**: SERIAL <<pk>>
+  --
+  <i>event</i>: UUID <<fk>>
+  date: date
+  <i>timetable</i>: int <<fk>>
+  <i>location</i>: int <<fk>>
+}
+
+entity lesson {
+  **id**: SERIAL <<pk>>
+  --
+  <i>discipline</i>: int <<fk>>
+  <i>timetable</i>: int <<fk>>
+}
+
+entity assessment {
+  **event**: UUID <<pk>> <<fk>>
+  --
+  <i>discipline</i>: int <<fk>>
+  weight: float
+  trimester: int
+  <i>lesson</i>: int <<fk>>
+  recovery: boolean
+}
+
+entity file {
+  **id**: UUID <<pk>>
+  --
+  title: varchar(200)
+  url: text
+}
+
+entity event_file {
+  <i>event</i>: UUID <<fk>>
+  <i>file</i>: UUID <<fk>>
+}
+
+entity discipline_file {
+  <i>discipline</i>: int <<fk>>
+  <i>file</i>: UUID <<fk>>
+}
+
+entity support {
+  **id**: UUID <<pk>>
+  --
+  <i>timetable</i>: int <<fk>>
+  <i>location</i>: int <<fk>>
+  <i>discipline</i>: int <<fk>>
+}
+
+entity register {
+  **id**: UUID <<pk>>
+  --
+  resume: text
+  date: date
+  <i>location</i>: int <<fk>>
+  <i>lesson</i>: int <<fk>>
+  <i>timetable</i>: int <<fk>>
+  created_at: timestamp
+  <i>created_by</i>: UUID <<fk>>
+}
+
+entity announcement {
+  **id**: UUID <<pk>>
+  --
+  title: varchar(200)
+  message: text
+  created_at: timestamp
+  <i>created_by</i>: UUID <<fk>>
+  <i>updated_by</i>: UUID <<fk>>
+  updated_at: timestamp
+}
+
+entity announcement_file {
+  <i>announcement</i>: UUID <<fk>>
+  <i>file</i>: UUID <<fk>>
+}
+
+entity list {
+  **id**: UUID <<pk>>
+  --
+  title: varchar(150)
+  description: text
+  <i>file</i>: UUID <<fk>>
+  <i>discipline</i>: int <<fk>>
+  created_at: timestamp
+  <i>created_by</i>: UUID <<fk>>
+  <i>updated_by</i>: UUID <<fk>>
+  updated_at: timestamp
+}
+
+discipline }|--|| teacher
+lesson }|--|| discipline
+register }o--|| location
+register |o--|| lesson 
+assessment |o--o| lesson
+
+event }o--|| event_type
+event_type }o--o{ event_specification
+event_specification ||--|{ event_option
+event }o--|| user
+
+user ||--|{ user_role
+role ||--|{ user_role
+announcement }o--|| user
+discipline ||--o{ support
+support }o--|| location
+
+assessment }o--|| event
+
+lesson |o--|| timetable
+support }o--|| timetable
+
+event ||--o{ schedule
+schedule }o--|| location
+schedule }o--|| timetable
+
+discipline ||--o{ list
+announcement }o--o{ file
+list ||--o| file
+
+event ||--o{ event_file
+file ||--o{ event_file
+
+announcement ||--o{ announcement_file
+file ||--o{ announcement_file
+
+discipline ||--o{ discipline_file
+file ||--|| discipline_file
+
+list }o--|| user
+assessment }o--|| discipline
+
+event ||--o{ event_revision
+
+@enduml

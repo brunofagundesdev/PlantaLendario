@@ -1,0 +1,20 @@
+bostas que deram ou podem dar
+- problema de arquivos indo pra 1 evento só -> Resolvido com id único
+- apresentacoes / trabalhos do daniel
+- mais de um dia de apresentacoes
+- ao inves de ser passado num_participantes é passado o numero de grupos
+
+a adicionar pq é pica
+- CRUD completo pra porra toda (eventos, atendimentos, registros)
+- feriados com API
+- aba de adicionar imprevistos e avisos
+- registros das aulas
+
+lembrar
+- duracao de horario no js nos sleect 50min
+
+Referências Design:
+    http://calendar.google.com/calendar/
+
+Referências Locais:
+https://mapy.com/en/zakladni?source=osm&id=17941266&x=-52.0889054&y=-32.0406629&z=19

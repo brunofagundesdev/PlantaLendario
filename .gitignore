@@ -1,0 +1,5 @@
+# Segredos
+.env
+
+# Node
+backend/node_modules/
