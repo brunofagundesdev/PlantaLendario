@@ -1,5 +1,5 @@
-import server from "./app.js"
+import app from "./app.js"
 
-server.listen({
+app.listen({
     port: 3333
 })

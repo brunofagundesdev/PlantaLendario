@@ -18,3 +18,21 @@ Referências Design:
 
 Referências Locais:
 https://mapy.com/en/zakladni?source=osm&id=17941266&x=-52.0889054&y=-32.0406629&z=19
+
+
+HTTP
+ ↓
+Server
+ ↓
+Route
+ ↓
+Middleware (auth, etc)
+ ↓
+Controller
+ ↓
+Service
+ ↓
+Database
+ ↓
+Postgres
+
