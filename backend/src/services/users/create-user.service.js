@@ -1,6 +1,31 @@
 import { createUserRepository } from "../../repository/users/create-user.repository.js";
+import { getUserByEmailRepository } from "../../repository/users/get-user-by-email.repository.js";
+import { normalizeUserName } from "../../utils/normalize-user-name.js";
+import bcrypt from "bcrypt";
+import { normalizeEmail } from 'email-normalizer';
+import { isValidEmail } from "../../utils/validate-email.js";
+// Erros
+import {  UserEmailInvalidError, UserAlreadyExistsError } from "../../errors/user.errors.js";
 
-export function createUserService(){
+export async function createUserService({ name, email, password }) { // Object
+    // Normalização e Validação
+    let normalizedName = normalizeUserName({ name });
+    let normalizedEmail = normalizeEmail({ email });
 
-    createUserRepository();
+    if (!isValidEmail({ email })) {
+        throw new UserEmailInvalidError();
+    }
+
+    // Regras de negócio
+    let getUserRegistered = await getUserByEmailRepository({ email: normalizedEmail });
+
+    if (getUserRegistered.length) {
+        throw new UserAlreadyExistsError();
+    }
+
+    // Hash da senha
+    const hash = await bcrypt.hash(password, 12);
+
+    // Criar conta no banco
+    return await createUserRepository({ name: normalizedName, email: normalizedEmail, password: hash });
 }

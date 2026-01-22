@@ -1,4 +1,4 @@
-create table user (
+create table account (
 	id UUID primary key default gen_random_uuid(),
 	name varchar(100) not null,
 	email varchar(254) unique not null,
@@ -11,10 +11,10 @@ create table role (
 	name varchar(100) not null
 );
 
-create table user_role (
-	user UUID references user(id) not null on delete cascade,
-	role UUID references role(id) not null on delete cascade,
-	primary key (user, role)
+create table account_role (
+	account UUID not null references account(id) on delete cascade,
+	role UUID not null references role(id) on delete cascade,
+	primary key (account, role)
 );
 
 create table teacher (
@@ -27,9 +27,9 @@ create table teacher (
 create table timetable (
 	id SERIAL primary key,
 	dow integer check(dow between 0 and 6) null,
-	start time not null,
-	end time null,
-    check(end > start or end is null)
+	start_time time not null,
+	end_time time null,
+    check(end_time > start_time or end_time is null)
 );
 
 create table event_type (
@@ -39,13 +39,13 @@ create table event_type (
 
 create table event_specification (
 	id SERIAL primary key,
-	event_type integer references event_type(id) not null,
+	event_type integer not null references event_type(id),
 	name varchar(100) unique not null
 );
 
 create table event_option (
 	id SERIAL primary key,
-	event_specification integer references event_specification(id) on delete cascade,
+	event_specification integer not null references event_specification(id) on delete cascade,
 	name varchar(100)
 );
 
@@ -53,28 +53,28 @@ create table event (
 	id UUID primary key default gen_random_uuid(),
 	title varchar(100),
 	description text,
-	event_type integer references event_type(id) not null,
+	event_type integer not null references event_type(id),
 	created_at timestamp default now() not null,
-	created_by UUID references user(id) not null,
-	updated_by UUID references user(id) null,
+	created_by UUID not null references account(id),
+	updated_by UUID references account(id) null,
 	updated_at timestamp null
 );
 
 create table event_revision (
     id UUID primary key default gen_random_uuid(),
-    event UUID references event(id) on delete cascade not null,
-    requested_by UUID references user(id) not null,
+    event UUID not null references event(id) on delete cascade,
+    requested_by UUID not null references account(id),
     message text not null,
 	status varchar(20) check (status in ('pending', 'approved', 'rejected')) default 'pending' not null,
     created_at timestamp default now() not null,
-    reviewed_by UUID references user(id),
+    reviewed_by UUID references account(id),
     reviewed_at timestamp
 );
 
 create table discipline (
 	id SERIAL primary key,
 	name varchar(100) not null unique,
-	teacher UUID references teacher(id) not null
+	teacher UUID not null references teacher(id)
 );
 
 create table location (
@@ -87,21 +87,21 @@ create table location (
 
 create table schedule (
 	id SERIAL primary key,
-	event UUID references event(id) not null,
+	event UUID not null references event(id),
 	date date not null,
-	timetable references timetable(id) not null,
-	location references location(id)
+	timetable integer not null references timetable(id),
+	location integer references location(id)
 );
 
 create table lesson (
 	id SERIAL primary key,
 	discipline integer references discipline(id) on delete cascade,
-	timetable integer references timetable(id) unique
+	timetable integer not null unique references timetable(id)
 );
 
 create table assessment (
     event UUID primary key references event(id) on delete cascade,
-	discipline integer references discipline(id) not null,
+	discipline integer not null references discipline(id),
 	weight float check (weight between 0 and 10),
 	trimester integer check(trimester between 1 and 3) not null,
 	lesson integer references lesson(id) null,
@@ -109,40 +109,40 @@ create table assessment (
 );
 
 create table file (
-	id UUID primary key gen_random_uuid(),
+	id UUID primary key default gen_random_uuid(),
 	title varchar(200) not null,
 	url text not null unique
 );
 
 create table event_file (
-	event UUID references event(id) not null on delete cascade,
-	file UUID references file(id) not null on delete cascade,
+	event UUID not null references event(id) on delete cascade,
+	file UUID not null references file(id) on delete cascade,
 	primary key (event, file)
 );
 
 create table discipline_file (
-	discipline integer references discipline(id) on delete cascade,
-	file UUID references file(id) unique on delete cascade,
+	discipline integer not null references discipline(id) on delete cascade,
+	file UUID not null unique references file(id) on delete cascade,
 	primary key (discipline, file)
 );
 
 create table support (
 	id UUID primary key,
-	timetable integer references timetable(id) not null,
-	location integer references location(id) not null,
-	discipline integer references discipline(id) not null on delete cascade
+	timetable integer not null references timetable(id),
+	location integer not null references location(id),
+	discipline integer not null references discipline(id) on delete cascade
 );
 
 create table register (
 	id UUID primary key,
 	resume text not null,
 	date date not null,
-	location integer references location(id) not null,
-	lesson integer references lesson(id) not null,
-	timetable integer references timetable(id) not null,
+	location integer not null references location(id),
+	lesson integer not null references lesson(id),
+	timetable integer not null references timetable(id),
 	created_at timestamp default now() not null, 
-	created_by UUID references user(id) not null,
-	updated_by UUID references user(id) null,
+	created_by UUID not null references account(id),
+	updated_by UUID references account(id) null,
 	updated_at timestamp null
 );
 
@@ -151,14 +151,14 @@ create table announcement (
 	title varchar(200) not null,
 	message text null,
 	created_at timestamp default now() not null,
-	created_by UUID references user(id) not null,
-	updated_by UUID references user(id) null,
+	created_by UUID not null references account(id),
+	updated_by UUID references account(id) null,
 	updated_at timestamp null
 );
 
 create table announcement_file (
-	announcement UUID references announcement(id) not null on delete cascade,
-	file UUID references file(id) not null on delete cascade,
+	announcement UUID not null references announcement(id) on delete cascade,
+	file UUID not null references file(id) on delete cascade,
 	primary key (announcement, file)
 );
 
@@ -167,9 +167,9 @@ create table list (
 	title varchar(150),
 	description text null,
 	file UUID references file(id) null,
-	discipline integer references discipline(id) not null,
+	discipline integer not null references discipline(id),
 	created_at timestamp default now() not null,
-	created_by UUID references user(id) not null,
-	updated_by UUID references user(id) null,
+	created_by UUID not null references account(id),
+	updated_by UUID references account(id) null,
 	updated_at timestamp null
 );

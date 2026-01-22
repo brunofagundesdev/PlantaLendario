@@ -1,5 +1,7 @@
-import app from "./app.js"
+import "dotenv/config.js";
+import app from "./app.js";
 
 app.listen({
-    port: 3333
-})
+    host: "0.0.0.0",
+    port: process.env.PORT
+});

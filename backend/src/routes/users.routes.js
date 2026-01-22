@@ -1,26 +1,18 @@
 // import do auth e controller
 import { createUserController } from "../controllers/users/create-user.controller.js";
+import { deleteUserController } from "../controllers/users/delete-user.controller.js";
+import { getUsersController } from "../controllers/users/get-users.controller.js";
+import { getUserController } from "../controllers/users/get-user.controller.js";
+import { putUserController } from "../controllers/users/put-user.controller.js";
+import { patchUserController } from "../controllers/users/patch-user.controller.js";
 
-export function eventRoutes(app) {
-    app.get("/users", (request, reply) => {
-        
-    })
+export function userRoutes(app) {
 
-    app.get("/users/:id", (request, reply) => {
+    app.get("/", { preHandler: [] }, getUsersController);
+    app.get("/:id", { preHandler: [] }, getUserController);
 
-    })
-
-    app.post("/users",{ preHandler: []}, createUserController); //usar esse pra todos outros métodos
-
-    app.patch("/users/:id", (request, reply) => {
-        
-    })
-
-    app.put("/users/:id", (request, reply) => {
-
-    })
-
-    app.delete("/users/:id", (request, reply) => {
-
-    })
+    app.post("/", { preHandler: [] }, createUserController);
+    app.put("/:id", { preHandler: [] }, putUserController);
+    app.patch("/:id", { preHandler: [] }, patchUserController);
+    app.delete("/:id", { preHandler: [] }, deleteUserController);
 }

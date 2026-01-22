@@ -1,7 +1,8 @@
 import { createUserService } from "../../services/users/create-user.service.js";
 
-export function createUserController(request, reply) {
-    // let id = tal
+export async function createUserController(request, reply) {
+    let { name, email, password } = request.body;
 
-    createUserService();
+    await createUserService({ name, email, password });
+    return reply.status(201).send()
 }

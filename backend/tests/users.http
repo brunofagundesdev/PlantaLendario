@@ -1,0 +1,50 @@
+POST http://localhost:3333/users
+Content-Type: application/json
+
+{
+    "name": "Lucas Madono",
+    "email": "klucas1569@gmail.com",
+    "password": "Roludos_anonimos1"
+}
+
+###
+POST http://localhost:3333/users
+Content-Type: application/json
+
+{
+    "name": "Rafael Betito",
+    "email": "betitao@gmail.com",
+    "password": "betito lindao"
+}
+
+###
+GET http://localhost:3333/users?orderBy=name
+
+###
+GET http://localhost:3333/users
+
+###
+GET http://localhost:3333/users/97957c54-90e3-4a20-945d-5e2f106ae19e
+
+###
+DELETE http://localhost:3333/users/21fe4651-c981-4fc0-b838-4975d4db3f4e
+
+###
+PUT http://localhost:3333/users/97957c54-90e3-4a20-945d-5e2f106ae19e
+Content-Type: application/json
+
+{
+    "name": "Rafael Betito",
+    "email": "betitao@gmail.com",
+    "password": "betito lindao"
+}
+
+
+###
+PATCH  http://localhost:3333/users/97957c54-90e3-4a20-945d-5e2f106ae19e
+Content-Type: application/json
+
+{
+    "email": "brunin9298@gmail.com",
+    "password": "planta-fi-hehe"
+}
