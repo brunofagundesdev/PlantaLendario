@@ -5,9 +5,10 @@ import bcrypt from "bcrypt";
 import { normalizeEmail } from 'email-normalizer';
 import { isValidEmail } from "../../utils/validate-email.js";
 // Erros
-import {  UserEmailInvalidError, UserAlreadyExistsError } from "../../errors/user.errors.js";
+import { UserEmailInvalidError, UserEmailDuplicatedError } from "../../errors/user.errors.js";
 
 export async function createUserService({ name, email, password }) { // Object
+
     // Normalização e Validação
     let normalizedName = normalizeUserName({ name });
     let normalizedEmail = normalizeEmail({ email });
@@ -19,8 +20,8 @@ export async function createUserService({ name, email, password }) { // Object
     // Regras de negócio
     let getUserRegistered = await getUserByEmailRepository({ email: normalizedEmail });
 
-    if (getUserRegistered.length) {
-        throw new UserAlreadyExistsError();
+    if (getUserRegistered) {
+        throw new UserEmailDuplicatedError();
     }
 
     // Hash da senha

@@ -18,11 +18,13 @@ export async function getUsersRepository({
             ? database``
             : database`limit ${limit}`;
 
-    return database`
-    select *
-    from account
-    ${orderClause}
-    ${limitClause}
-    offset ${offset}
-  `;
+    const result = await database`
+        select *
+        from account
+        ${orderClause}
+        ${limitClause}
+        offset ${offset}
+    `;
+
+    return result;
 }

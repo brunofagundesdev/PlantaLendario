@@ -1,8 +1,8 @@
 import { AppError } from './appError.error.js';
 
-class UserAlreadyExistsError extends AppError {
+class UserEmailDuplicatedError extends AppError {
   constructor() {
-    super('Usuário já registrado no sistema', 409);
+    super('Email já registrado no sistema', 409);
   }
 }
 
@@ -62,7 +62,7 @@ class InvalidUserPatchError extends AppError {
 }
 
 export {
-  UserAlreadyExistsError,
+  UserEmailDuplicatedError,
   UserEmailInvalidError,
   UserIdInvalidError,
   UserNotFoundError,

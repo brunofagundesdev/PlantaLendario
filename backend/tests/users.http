@@ -1,50 +1,136 @@
-POST http://localhost:3333/users
-Content-Type: application/json
-
-{
-    "name": "Lucas Madono",
-    "email": "klucas1569@gmail.com",
-    "password": "Roludos_anonimos1"
-}
-
-###
-POST http://localhost:3333/users
-Content-Type: application/json
-
-{
-    "name": "Rafael Betito",
-    "email": "betitao@gmail.com",
-    "password": "betito lindao"
-}
-
-###
-GET http://localhost:3333/users?orderBy=name
-
-###
+### =========================
+### GET /users
+### Lista usuários
+### =========================
 GET http://localhost:3333/users
+Content-Type: application/json
 
-###
-GET http://localhost:3333/users/97957c54-90e3-4a20-945d-5e2f106ae19e
 
-###
-DELETE http://localhost:3333/users/21fe4651-c981-4fc0-b838-4975d4db3f4e
 
-###
-PUT http://localhost:3333/users/97957c54-90e3-4a20-945d-5e2f106ae19e
+### =========================
+### GET /users/:id
+### Usuário existente
+### =========================
+GET http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
+Content-Type: application/json
+
+
+
+### =========================
+### GET /users/:id
+### ID inválido
+### =========================
+GET http://localhost:3333/users/123
+Content-Type: application/json
+
+
+
+### =========================
+### POST /users
+### Criar usuário
+### =========================
+POST http://localhost:3333/users
 Content-Type: application/json
 
 {
-    "name": "Rafael Betito",
-    "email": "betitao@gmail.com",
-    "password": "betito lindao"
+  "name": "Bruno Fagundes",
+  "email": "brunin9298@gmail.com",
+  "password": "planta-fi-hehe"
 }
 
 
-###
-PATCH  http://localhost:3333/users/97957c54-90e3-4a20-945d-5e2f106ae19e
+
+### =========================
+### POST /users
+### Email duplicado
+### =========================
+POST http://localhost:3333/users
 Content-Type: application/json
 
 {
-    "email": "brunin9298@gmail.com",
-    "password": "planta-fi-hehe"
+  "name": "Clone do Bruno",
+  "email": "brunin9298@gmail.com",
+  "password": "outra-senha"
 }
+
+
+
+### =========================
+### PUT /users/:id
+### Atualiza tudo (menos id)
+### =========================
+PUT http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
+Content-Type: application/json
+
+{
+  "name": "Bruno Atualizado",
+  "email": "bruno.atualizado@gmail.com",
+  "password": "nova-senha"
+}
+
+
+
+### =========================
+### PUT /users/:id
+### Body incompleto (espera erro)
+### =========================
+PUT http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
+Content-Type: application/json
+
+{
+  "name": "Só Nome"
+}
+
+
+
+### =========================
+### PATCH /users/:id
+### Atualiza só email
+### =========================
+PATCH http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
+Content-Type: application/json
+
+{
+  "email": "email.patch@gmail.com"
+}
+
+
+
+### =========================
+### PATCH /users/:id
+### Atualiza email + senha
+### =========================
+PATCH http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
+Content-Type: application/json
+
+{
+  "email": "email.patch2@gmail.com",
+  "password": "senha-patch"
+}
+
+
+
+### =========================
+### PATCH /users/:id
+### Body vazio (espera erro)
+### =========================
+PATCH http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
+Content-Type: application/json
+
+{}
+
+
+
+### =========================
+### DELETE /users/:id
+### Remove usuário
+### =========================
+DELETE http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
+
+
+
+### =========================
+### DELETE /users/:id
+### Usuário inexistente
+### =========================
+DELETE http://localhost:3333/users/00000000-0000-0000-0000-000000000000

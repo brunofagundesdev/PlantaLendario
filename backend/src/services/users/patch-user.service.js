@@ -37,7 +37,7 @@ export async function patchUserService({ id, body = {} }) {
         });
 
         if (existing.length) {
-            throw new UserErrors.UserAlreadyExistsError();
+            throw new UserErrors.UserEmailDuplicatedError();
         }
     }
 
