@@ -36,3 +36,6 @@ Database
  ↓
 Postgres
 
+arrumar:
+nome de usuario algo nao string fudido
+

@@ -17,6 +17,7 @@
     "bcrypt": "^6.0.0",
     "email-normalizer": "^1.0.0",
     "fastify": "^5.6.2",
+    "jsonwebtoken": "^9.0.3",
     "postgres": "^3.4.7",
     "uuid": "^13.0.0"
   },

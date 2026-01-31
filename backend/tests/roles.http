@@ -1,0 +1,131 @@
+@baseUrl = http://localhost:3333
+@roleId = cf363c0c-34b0-41fb-afa8-4da990397402
+
+### =========================
+### GET /roles
+### Lista todas as roles
+### =========================
+GET {{baseUrl}}/roles
+Content-Type: application/json
+
+
+### =========================
+### GET /roles/:id
+### Role existente
+### =========================
+GET {{baseUrl}}/roles/{{roleId}}
+Content-Type: application/json
+
+
+### =========================
+### GET /roles/:id
+### ID inválido (espera erro)
+### =========================
+GET {{baseUrl}}/roles/123
+Content-Type: application/json
+
+
+### =========================
+### POST /roles
+### Criar role válida
+### =========================
+POST {{baseUrl}}/roles
+Content-Type: application/json
+
+{
+  "name": "Admin"
+}
+
+
+### =========================
+### POST /roles
+### Nome duplicado (espera erro)
+### =========================
+POST {{baseUrl}}/roles
+Content-Type: application/json
+
+{
+  "name": "Admin"
+}
+
+
+### =========================
+### POST /roles
+### Body vazio (espera erro)
+### =========================
+POST {{baseUrl}}/roles
+Content-Type: application/json
+
+{}
+
+
+### =========================
+### POST /roles
+### Campo inválido (espera erro)
+### =========================
+POST {{baseUrl}}/roles
+Content-Type: application/json
+
+{
+  "name": 123
+}
+
+
+### =========================
+### PUT /roles/:id
+### Atualiza role (completo)
+### =========================
+PUT {{baseUrl}}/roles/{{roleId}}
+Content-Type: application/json
+
+{
+  "name": "Manager"
+}
+
+
+### =========================
+### PUT /roles/:id
+### Body incompleto (espera erro)
+### =========================
+PUT {{baseUrl}}/roles/{{roleId}}
+Content-Type: application/json
+
+{}
+
+
+### =========================
+### PATCH /roles/:id
+### Atualiza apenas o nome
+### =========================
+PATCH {{baseUrl}}/roles/{{roleId}}
+Content-Type: application/json
+
+{
+  "name": "Support"
+}
+
+
+### =========================
+### PATCH /roles/:id
+### Body vazio (espera erro)
+### =========================
+PATCH {{baseUrl}}/roles/{{roleId}}
+Content-Type: application/json
+
+{}
+
+
+### =========================
+### DELETE /roles/:id
+### Remove role existente
+### =========================
+DELETE {{baseUrl}}/roles/{{roleId}}
+Content-Type: application/json
+
+
+### =========================
+### DELETE /roles/:id
+### Role inexistente (espera erro)
+### =========================
+DELETE {{baseUrl}}/roles/00000000-0000-0000-0000-000000000000
+Content-Type: application/json

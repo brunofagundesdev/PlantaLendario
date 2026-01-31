@@ -1,3 +1,27 @@
+drop table if exists account;
+drop table if exists role;
+drop table if exists account_role;
+drop table if exists teacher;
+drop table if exists timetable;
+drop table if exists event_type;
+drop table if exists event_specification;
+drop table if exists event_option;
+drop table if exists event;
+drop table if exists event_revision;
+drop table if exists discipline;
+drop table if exists location;
+drop table if exists schedule;
+drop table if exists lesson;
+drop table if exists assessment;
+drop table if exists file;
+drop table if exists event_file;
+drop table if exists discipline_file;
+drop table if exists support;
+drop table if exists register;
+drop table if exists announcement;
+drop table if exists announcement_file;
+drop table if exists list;
+
 create table account (
 	id UUID primary key default gen_random_uuid(),
 	name varchar(100) not null,

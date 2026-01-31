@@ -1,9 +1,12 @@
+@bruninToken = eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSJ9.o70ZhIgf-dOTtZ9CWXtvgx7t08CpEng_UgJ9t8FydQ4
+
 ### =========================
 ### GET /users
 ### Lista usuários
 ### =========================
 GET http://localhost:3333/users
 Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
 
 
 
@@ -33,9 +36,9 @@ POST http://localhost:3333/users
 Content-Type: application/json
 
 {
-  "name": "Bruno Fagundes",
-  "email": "brunin9298@gmail.com",
-  "password": "planta-fi-hehe"
+  "name": "Lucas Madono",
+  "email": "madono@gmail.com",
+  "password": "foda"
 }
 
 
