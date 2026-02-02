@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3333
-@roleId = cf363c0c-34b0-41fb-afa8-4da990397402
+@roleId = d69f9dde-b0bd-4315-964f-8015c817eb3f
 
 ### =========================
 ### GET /roles
@@ -33,7 +33,8 @@ POST {{baseUrl}}/roles
 Content-Type: application/json
 
 {
-  "name": "Admin"
+  "name": "Planta",
+  "color": "#79B822"
 }
 
 
@@ -79,7 +80,8 @@ PUT {{baseUrl}}/roles/{{roleId}}
 Content-Type: application/json
 
 {
-  "name": "Manager"
+  "name": "Plantaralho",
+  "color": "#1e38bd"
 }
 
 
@@ -101,7 +103,8 @@ PATCH {{baseUrl}}/roles/{{roleId}}
 Content-Type: application/json
 
 {
-  "name": "Support"
+  "name": "Planta",
+  "color": "#79B822"
 }
 
 

@@ -51,5 +51,5 @@ export async function patchUserService({ id, body = {} }) {
     if (normalizedEmail != null) patchBody.email = normalizedEmail;
     if (hash != null) patchBody.password = hash;
 
-    return patchUserRepository({ id, body: patchBody });
+    return await patchUserRepository({ id, body: patchBody });
 }

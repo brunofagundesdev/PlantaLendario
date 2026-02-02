@@ -1,6 +1,6 @@
 import { createUserRepository } from "../../repository/users/create-user.repository.js";
 import { getUserByEmailRepository } from "../../repository/users/get-user-by-email.repository.js";
-import { normalizeUserName } from "../../utils/normalize-user-name.js";
+import { normalizeName } from "../../utils/normalize-name.js";
 import bcrypt from "bcrypt";
 import { normalizeEmail } from 'email-normalizer';
 import { isValidEmail } from "../../utils/validate-email.js";
@@ -10,7 +10,7 @@ import { UserEmailInvalidError, UserEmailDuplicatedError } from "../../errors/us
 export async function createUserService({ name, email, password }) { // Object
 
     // Normalização e Validação
-    let normalizedName = normalizeUserName({ name });
+    let normalizedName = normalizeName(name);
     let normalizedEmail = normalizeEmail({ email });
 
     if (!isValidEmail({ email })) {

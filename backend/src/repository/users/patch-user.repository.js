@@ -9,8 +9,6 @@ export async function patchUserRepository({ id, body }) {
 
     let clauses = [];
 
-    console.log(body)
-    console.log(name, email, password)
     if (name !== null) clauses.push(database`name = ${name}`);
     if (email !== null) clauses.push(database`email = ${email}`);
     if (password !== null) clauses.push(database`password = ${password}`);
