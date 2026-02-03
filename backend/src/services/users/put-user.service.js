@@ -1,4 +1,4 @@
-import { getUserByIdRepository } from "../../repository/users/get-user-by-id.repository.js";
+import { getUserRepository } from "../../repository/users/get-user.repository.js";
 import { getUserByEmailRepository } from "../../repository/users/get-user-by-email.repository.js";
 import * as UserErrors from "../../errors/user.errors.js";
 import { validate as uuidValidate } from "uuid";
@@ -14,7 +14,7 @@ export async function putUserService({ id, body = {} }) {
         throw new UserErrors.UserIdInvalidError();
     }
 
-    const user = await getUserByIdRepository({ id });
+    const user = await getUserRepository({ id });
 
     if (!user) {
         throw new UserErrors.UserNotFoundError();

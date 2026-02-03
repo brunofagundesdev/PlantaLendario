@@ -38,13 +38,13 @@ class RolePatchInvalidError extends AppError {
 
 class RoleNameAlredyExistsError extends AppError {
     constructor() {
-        super("Nome de cargo já registrado", 400);
+        super("Nome de cargo já registrado", 409);
     }
 }
 
 class RoleColorAlredyUsedError extends AppError {
     constructor() {
-        super("Cor de cargo já utilizadp", 400);
+        super("Cor de cargo já utilizada", 409);
     }
 }
 

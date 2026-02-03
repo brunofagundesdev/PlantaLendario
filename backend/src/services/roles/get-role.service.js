@@ -5,7 +5,7 @@ import { getRoleRepository } from "../../repository/roles/get-role.repository.js
 import * as RoleErrors from "../../errors/role.errors.js"
 
 // Validators
-import { validate as uuidValidate} from "uuid";
+import { validate as uuidValidate } from "uuid";
 
 async function getRoleService({ id }) {
 
@@ -13,7 +13,7 @@ async function getRoleService({ id }) {
         throw new RoleErrors.RoleIdInvalidError();
     }
 
-    let role = await getRoleRepository();
+    let role = await getRoleRepository({ id });
 
     if (!role) {
         throw new RoleErrors.RoleNotFoundError();

@@ -1,4 +1,5 @@
 @bruninToken = eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSJ9.o70ZhIgf-dOTtZ9CWXtvgx7t08CpEng_UgJ9t8FydQ4
+@bruninId = da04e53b-7c5e-4c43-b7a3-1428cf6ef791
 
 ### =========================
 ### GET /users
@@ -14,7 +15,7 @@ Authorization: Bearer {{bruninToken}}
 ### GET /users/:id
 ### Usuário existente
 ### =========================
-GET http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
+GET http://localhost:3333/users/{{bruninId}}
 Content-Type: application/json
 
 

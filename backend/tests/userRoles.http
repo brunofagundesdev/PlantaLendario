@@ -1,0 +1,14 @@
+@baseUrl = http://localhost:3333
+
+@userId = da04e53b-7c5e-4c43-b7a3-1428cf6ef791
+
+@roleId = 25e6d262-e8b8-4a1a-b477-e4a08fbf37a7
+
+
+###
+POST {{baseUrl}}/users/{{userId}}/roles
+Content-Type: application/json
+
+{
+    "roleId": "{{roleId}}"
+}

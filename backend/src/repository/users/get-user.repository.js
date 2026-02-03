@@ -1,6 +1,6 @@
 import { database } from "../../infra/database.js";
 
-export async function getUserByIdRepository({ id }) {
+export async function getUserRepository({ id }) {
     const result = await database`
         select *
         from account

@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3333
-@roleId = d69f9dde-b0bd-4315-964f-8015c817eb3f
+@roleId = 21e6d262-e8b8-4a1a-b477-e4a08fbf37a7
 
 ### =========================
 ### GET /roles
@@ -46,7 +46,8 @@ POST {{baseUrl}}/roles
 Content-Type: application/json
 
 {
-  "name": "Admin"
+  "name": "escriba",
+  "color": "#0f2f76"
 }
 
 
@@ -123,7 +124,6 @@ Content-Type: application/json
 ### Remove role existente
 ### =========================
 DELETE {{baseUrl}}/roles/{{roleId}}
-Content-Type: application/json
 
 
 ### =========================
@@ -131,4 +131,3 @@ Content-Type: application/json
 ### Role inexistente (espera erro)
 ### =========================
 DELETE {{baseUrl}}/roles/00000000-0000-0000-0000-000000000000
-Content-Type: application/json

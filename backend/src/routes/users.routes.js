@@ -8,8 +8,12 @@ import { patchUserController } from "../controllers/users/patch-user.controller.
 // Middlewares
 import { ensureAuthenticated } from "../middlewares/ensure-authenticated.middleware.js";
 
-export function userRoutes(app) {
+// Roles
+import { userRoleRoutes } from "./usersRoles.routes.js";
 
+export async function userRoutes(app) {
+
+    //CRUD
     app.get("/", { preHandler: [ensureAuthenticated] }, getUsersController);
     app.get("/:id", { preHandler: [] }, getUserController);
 
@@ -17,4 +21,7 @@ export function userRoutes(app) {
     app.put("/:id", { preHandler: [] }, putUserController);
     app.patch("/:id", { preHandler: [] }, patchUserController);
     app.delete("/:id", { preHandler: [] }, deleteUserController);
+
+    // Roles
+    app.register(userRoleRoutes, { prefix: "/:id/roles"});
 }
