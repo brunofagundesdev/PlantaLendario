@@ -2,7 +2,7 @@ import { database } from "../../infra/database.js";
 
 export async function getUserRepository({ id }) {
     const result = await database`
-        select *
+        select id, name, email, created_at
         from account
         where id = ${id}
         limit 1

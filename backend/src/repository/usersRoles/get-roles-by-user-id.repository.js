@@ -7,7 +7,7 @@ async function getRolesByUserIdRepository({ id }) {
         where account_role.account = ${id};
     `;
 
-    return result;
+    return Array.from(result);
 }
 
 export {

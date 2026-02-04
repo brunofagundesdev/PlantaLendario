@@ -1,5 +1,6 @@
 @bruninToken = eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSJ9.o70ZhIgf-dOTtZ9CWXtvgx7t08CpEng_UgJ9t8FydQ4
 @bruninId = da04e53b-7c5e-4c43-b7a3-1428cf6ef791
+@madonoId = f1f229aa-f477-436d-a63b-38dd3d521e3a
 
 ### =========================
 ### GET /users
@@ -16,6 +17,9 @@ Authorization: Bearer {{bruninToken}}
 ### Usuário existente
 ### =========================
 GET http://localhost:3333/users/{{bruninId}}
+Content-Type: application/json
+###
+GET http://localhost:3333/users/{{madonoId}}
 Content-Type: application/json
 
 

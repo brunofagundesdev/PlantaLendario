@@ -1,13 +1,22 @@
 @baseUrl = http://localhost:3333
 
-@userId = da04e53b-7c5e-4c43-b7a3-1428cf6ef791
+@bruninId = da04e53b-7c5e-4c43-b7a3-1428cf6ef791
+@madonoId = f1f229aa-f477-436d-a63b-38dd3d521e3a
 
-@roleId = 25e6d262-e8b8-4a1a-b477-e4a08fbf37a7
+@roleId = 21e6d262-e8b8-4a1a-b477-e4a08fbf37a7
 
 
 ###
-POST {{baseUrl}}/users/{{userId}}/roles
+POST {{baseUrl}}/users/{{bruninId}}/roles
 Content-Type: application/json
+
+{
+    "roleId": "{{roleId}}"
+}
+
+###
+POST {{baseUrl}}/users/{{madonoId}}/roles
+Content-Type: application/json 
 
 {
     "roleId": "{{roleId}}"
