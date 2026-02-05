@@ -1,6 +1,8 @@
-@bruninToken = eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSJ9.o70ZhIgf-dOTtZ9CWXtvgx7t08CpEng_UgJ9t8FydQ4
+@bruninToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSIsIm5hbWUiOiJCcnVubyBGYWd1bmRlcyIsImVtYWlsIjoiYnJ1bmluOTI5OEBnbWFpbC5jb20iLCJyb2xlcyI6W3siaWQiOiIyMWU2ZDI2Mi1lOGI4LTRhMWEtYjQ3Ny1lNGEwOGZiZjM3YTciLCJuYW1lIjoicGxhbnRhIiwiY29sb3IiOiIjNzlCODIyIn1dfQ.IVaScrxT9Rz0l8XW0HEKdMRVIvNEvP1IXX6-5CKxaRs
 @bruninId = da04e53b-7c5e-4c43-b7a3-1428cf6ef791
 @madonoId = f1f229aa-f477-436d-a63b-38dd3d521e3a
+
+@testeId = ec6bb113-5291-48ec-9045-e4a8e4f7881f
 
 ### =========================
 ### GET /users
@@ -18,9 +20,11 @@ Authorization: Bearer {{bruninToken}}
 ### =========================
 GET http://localhost:3333/users/{{bruninId}}
 Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
 ###
 GET http://localhost:3333/users/{{madonoId}}
 Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
 
 
 
@@ -41,9 +45,9 @@ POST http://localhost:3333/users
 Content-Type: application/json
 
 {
-  "name": "Lucas Madono",
-  "email": "madono@gmail.com",
-  "password": "foda"
+  "name": "teste",
+  "email": "teste@gmail.com",
+  "password": "teste"
 }
 
 
@@ -61,45 +65,15 @@ Content-Type: application/json
   "password": "outra-senha"
 }
 
-
-
-### =========================
-### PUT /users/:id
-### Atualiza tudo (menos id)
-### =========================
-PUT http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
-Content-Type: application/json
-
-{
-  "name": "Bruno Atualizado",
-  "email": "bruno.atualizado@gmail.com",
-  "password": "nova-senha"
-}
-
-
-
-### =========================
-### PUT /users/:id
-### Body incompleto (espera erro)
-### =========================
-PUT http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
-Content-Type: application/json
-
-{
-  "name": "Só Nome"
-}
-
-
-
 ### =========================
 ### PATCH /users/:id
 ### Atualiza só email
 ### =========================
-PATCH http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
+PATCH http://localhost:3333/users/{{testeId}}
 Content-Type: application/json
 
 {
-  "email": "email.patch@gmail.com"
+  "email": "teste@gmail.com"
 }
 
 
@@ -142,3 +116,6 @@ DELETE http://localhost:3333/users/cf363c0c-34b0-41fb-afa8-4da990397402
 ### Usuário inexistente
 ### =========================
 DELETE http://localhost:3333/users/00000000-0000-0000-0000-000000000000
+
+
+

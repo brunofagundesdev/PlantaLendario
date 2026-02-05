@@ -6,8 +6,14 @@ import { normalizeEmail } from 'email-normalizer';
 import { isValidEmail } from "../../utils/validate-email.js";
 // Erros
 import { UserEmailInvalidError, UserEmailDuplicatedError } from "../../errors/user.errors.js";
+import { UserNameInvalidError } from "../../errors/user.errors.js";
 
-export async function createUserService({ name, email, password }) { // Object
+export async function createUserService({ name, email, password}) { // Object
+
+    //Name
+    if (typeof name !== 'string' || !name) {
+        throw new UserNameInvalidError();
+    }
 
     // Normalização e Validação
     let normalizedName = normalizeName(name);

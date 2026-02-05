@@ -9,6 +9,7 @@ import { normalizeName } from "../../utils/normalize-name.js";
 import * as RoleErrors from "../../errors/role.errors.js";
 import { getRoleByColorRepository } from "../../repository/roles/get-role-by-color.repository.js";
 
+
 async function createRoleService({ name, color = "#000000" }) {
 
     // Name

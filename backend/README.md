@@ -3,10 +3,10 @@
 Backend do projeto **Plantalendário**, responsável por:
 - autenticação de usuários
 - regras de acesso
-- comunicação com o banco de dados (Supabase)
+- comunicação com o banco de dados (Neon)
 - proteção das rotas da aplicação
 
-Este backend é consumido pelo frontend via requisições HTTP (`GET`, `POST`, `PUT`, `DELETE`).
+Este backend é consumido pelo frontend via requisições HTTP (`GET`, `POST`, `PATCH`, `DELETE`).
 
 ---
 
@@ -15,7 +15,6 @@ Este backend é consumido pelo frontend via requisições HTTP (`GET`, `POST`, `
 O backend segue uma arquitetura simples e organizada, separando responsabilidades:
 
 Requisição → Rotas → Middlewares → Controllers → Services → Banco
-
 
 Cada camada tem um papel bem definido, evitando código bagunçado e facilitando manutenção.
 

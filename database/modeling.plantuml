@@ -1,3 +1,4 @@
+
 @startuml modeling
 scale 1.00
 skinparam ClassBackgroundColor White
@@ -14,7 +15,7 @@ skinparam LineType Ortho
 hide Circle
 hide Empty Members
 
-entity user {
+entity account {
   **id**: UUID <<pk>>
   --
   name: varchar(100)
@@ -29,8 +30,8 @@ entity role {
   name: varchar(100)
 }
 
-entity user_role {
-  <i>**user**</i>: UUID <<fk>>
+entity account_role {
+  <i>**account**</i>: UUID <<fk>>
   <i>**role**</i>: UUID <<fk>>
 }
 
@@ -209,13 +210,13 @@ register |o--|| lesson
 assessment |o--o| lesson
 
 event }o--|| event_type
-event_type }o--o{ event_specification
+event_type }|--o{ event_specification
 event_specification ||--|{ event_option
-event }o--|| user
+event }o--|| account
 
-user ||--|{ user_role
-role ||--|{ user_role
-announcement }o--|| user
+account ||--|{ account_role
+role ||--|{ account_role
+announcement }o--|| account
 discipline ||--o{ support
 support }o--|| location
 
@@ -241,9 +242,11 @@ file ||--o{ announcement_file
 discipline ||--o{ discipline_file
 file ||--|| discipline_file
 
-list }o--|| user
+list }o--|| account
 assessment }o--|| discipline
 
 event ||--o{ event_revision
+
+event_revision }o--|| account
 
 @enduml

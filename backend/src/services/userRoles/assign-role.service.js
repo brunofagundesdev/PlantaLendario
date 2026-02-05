@@ -39,7 +39,6 @@ async function assignRoleService({ userId, roleId }) {
         roles: userRoles
     };
 
-    console.log(user)
     let userHasRole = user.roles.some(role => role.id === roleId);
 
     if (userHasRole) {

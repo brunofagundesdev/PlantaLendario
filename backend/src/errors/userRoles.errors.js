@@ -6,6 +6,15 @@ class UserAlreadyHasRole extends AppError {
     }
 }
 
+class UserNotAuthorized extends AppError {
+    constructor() {
+        super('Você não tem autorização para essa ação', 400);
+    }
+}
+
+
+
 export {
-    UserAlreadyHasRole
+    UserAlreadyHasRole,
+    UserNotAuthorized
 }

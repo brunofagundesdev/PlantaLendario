@@ -7,8 +7,11 @@ import { isValidEmail } from "../../utils/validate-email.js";
 import bcrypt from "bcrypt";
 
 import { patchUserRepository } from "../../repository/users/patch-user.repository.js";
+import { UserNameInvalidError } from "../../errors/user.errors.js";
 
 export async function patchUserService({ id, body = {} }) {
+
+    // Id
     if (!uuidValidate(id)) {
         throw new UserErrors.UserIdInvalidError();
     }
@@ -18,10 +21,18 @@ export async function patchUserService({ id, body = {} }) {
         throw new UserErrors.UserNotFoundError();
     }
 
+    // Body
     let { name, email, password } = body;
 
     if (name == null && email == null && password == null) {
         throw new UserErrors.InvalidUserPatchError();
+    }
+
+    // Name
+    if (name != null) {
+        if (typeof name !== 'string') {
+            throw new UserNameInvalidError();
+        }
     }
 
     let normalizedEmail;
@@ -36,7 +47,7 @@ export async function patchUserService({ id, body = {} }) {
             email: normalizedEmail
         });
 
-        if (existing.length) {
+        if (existing) {
             throw new UserErrors.UserEmailDuplicatedError();
         }
     }

@@ -12,6 +12,12 @@ class UserEmailInvalidError extends AppError {
   }
 }
 
+class UserNameInvalidError extends AppError {
+  constructor() {
+    super('Nome inválido', 400);
+  }
+}
+
 class UserIdInvalidError extends AppError {
   constructor() {
     super('Id inválido', 400);
@@ -71,5 +77,6 @@ export {
   InvalidUserLimitError,
   InvalidUserOffsetError,
   InvalidUserPutError,
-  InvalidUserPatchError
+  InvalidUserPatchError,
+  UserNameInvalidError
 }
