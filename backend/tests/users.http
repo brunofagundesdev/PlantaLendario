@@ -45,9 +45,9 @@ POST http://localhost:3333/users
 Content-Type: application/json
 
 {
-  "name": "teste",
-  "email": "teste@gmail.com",
-  "password": "teste"
+  "name": 123,
+  "email": "pauzao@gmail.com",
+  "password": "asoiyabsdi"
 }
 
 
@@ -69,11 +69,12 @@ Content-Type: application/json
 ### PATCH /users/:id
 ### Atualiza só email
 ### =========================
-PATCH http://localhost:3333/users/{{testeId}}
+PATCH http://localhost:3333/users/{{bruninId}}
 Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
 
 {
-  "email": "teste@gmail.com"
+  "name": "TESTE"
 }
 
 

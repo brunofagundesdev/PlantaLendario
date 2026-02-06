@@ -18,6 +18,12 @@ class UserNameInvalidError extends AppError {
   }
 }
 
+class UserNameAlredyExistsError extends AppError{
+  constructor(){
+    super('Nome de usuário já registrado', 400)
+  }
+}
+
 class UserIdInvalidError extends AppError {
   constructor() {
     super('Id inválido', 400);
@@ -78,5 +84,6 @@ export {
   InvalidUserOffsetError,
   InvalidUserPutError,
   InvalidUserPatchError,
-  UserNameInvalidError
+  UserNameInvalidError,
+  UserNameAlredyExistsError
 }

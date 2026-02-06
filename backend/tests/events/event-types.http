@@ -1,0 +1,32 @@
+@bruninToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSIsIm5hbWUiOiJCcnVubyBGYWd1bmRlcyIsImVtYWlsIjoiYnJ1bmluOTI5OEBnbWFpbC5jb20iLCJyb2xlcyI6W3siaWQiOiIyMWU2ZDI2Mi1lOGI4LTRhMWEtYjQ3Ny1lNGEwOGZiZjM3YTciLCJuYW1lIjoicGxhbnRhIiwiY29sb3IiOiIjNzlCODIyIn1dfQ.IVaScrxT9Rz0l8XW0HEKdMRVIvNEvP1IXX6-5CKxaRs
+@bruninId = da04e53b-7c5e-4c43-b7a3-1428cf6ef791
+@madonoId = f1f229aa-f477-436d-a63b-38dd3d521e3a
+@testeId = ec6bb113-5291-48ec-9045-e4a8e4f7881f
+
+@baseUrl = http://localhost:3333
+
+
+###
+POST {{baseUrl}}/events/types
+Content-Type: application/json
+
+{
+    "name": "teste"
+}
+
+###
+GET {{baseUrl}}/events/types/3
+
+###
+GET {{baseUrl}}/events/types
+
+###
+PATCH {{baseUrl}}/events/types/7
+Content-Type: application/json
+
+{
+    "name": " Bruno "
+}
+
+###
+DELETE {{baseUrl}}/events/types/6

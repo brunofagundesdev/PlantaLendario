@@ -13,6 +13,8 @@ async function eventSpecificationRoutes(app) { // /events/specifications
     app.post("/", { preHandler: [] }, createEventSpecificationController);
     // app.patch("/:id", { preHandler: [] }, patchEventSpecificationController);
     // app.delete("/:id", { preHandler: [] }, deleteEventSpecificationController);
+
+    // app.register(opcoes)
 }
 
 export {
