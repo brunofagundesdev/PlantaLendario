@@ -5,8 +5,10 @@ import { createEventController } from "../../controllers/events/create-event.con
 // import { getEventController } from "../controllers/events/get-event.controller.js";
 // import { patchEventController } from "../controllers/events/patch-event.controller.js";
 
-// Type
+// Type, Specifications e Options
 import { eventTypeRoutes } from "./types.routes.js";
+import { eventSpecificationRoutes } from "./specifications.routes.js";
+
 
 // Middlewares
 import { ensureAuthenticated } from "../../middlewares/ensure-authenticated.middleware.js";
@@ -24,6 +26,8 @@ async function eventRoutes(app) {
     // app.delete("/:id", { preHandler: [] }, deleteEventController);
 
     app.register(eventTypeRoutes, { prefix: "/types" });
+    app.register(eventSpecificationRoutes, { prefix: "/specifications" });
+
 }
 
 export {

@@ -7,11 +7,12 @@
 
 
 ###
-POST {{baseUrl}}/events/types
+POST {{baseUrl}}/events/specifications
 Content-Type: application/json
 
 {
-    "name": "teste"
+    "typeId": 3,
+    "name": "Formato de entrega"
 }
 
 ###

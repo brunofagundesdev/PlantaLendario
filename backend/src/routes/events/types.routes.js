@@ -4,8 +4,6 @@ import { getEventTypesController } from "../../controllers/events/types/get-even
 import { patchEventTypeController } from "../../controllers/events/types/patch-event-type.controller.js";
 import { deleteEventTypeController } from "../../controllers/events/types/delete-event-type.controller.js";
 
-import { eventSpecificationRoutes } from "./specifications.routes.js";
-
 async function eventTypeRoutes(app) { // /events/types
     app.get("/", { preHandler: [] }, getEventTypesController);
     app.get("/:id", { preHandler: [] }, getEventTypeController);
@@ -13,8 +11,6 @@ async function eventTypeRoutes(app) { // /events/types
     app.post("/", { preHandler: [] }, createEventTypeController);
     app.patch("/:id", { preHandler: [] }, patchEventTypeController);
     app.delete("/:id", { preHandler: [] }, deleteEventTypeController);
-
-    app.register(eventSpecificationRoutes, { prefix: "/:typeId/specifications" });
 }
 
 export {
