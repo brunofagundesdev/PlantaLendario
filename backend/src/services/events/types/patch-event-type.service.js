@@ -29,6 +29,11 @@ async function patchEventTypeService({ id, body = {} }) {
         throw new EventTypeErrors.EventTypeNameInvalidError();
     }
 
+    let existingEventTypeName = await getEventTypeByNameRepository({ name: normalizedName });
+    if (existingEventTypeName) {
+        throw new EventTypeErrors.EventTypeNameAlredyExistsError();
+    }
+
     await patchEventTypeRepository({ id, body: { name: normalizedName } })
 }
 

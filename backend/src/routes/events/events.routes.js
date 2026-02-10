@@ -6,8 +6,8 @@ import { createEventController } from "../../controllers/events/create-event.con
 // import { patchEventController } from "../controllers/events/patch-event.controller.js";
 
 // Type, Specifications e Options
-import { eventTypeRoutes } from "./types.routes.js";
-import { eventSpecificationRoutes } from "./specifications.routes.js";
+import { eventTypeRoutes } from "./eventTypes.routes.js";
+import { eventSpecificationRoutes } from "./eventSpecifications.routes.js";
 
 
 // Middlewares

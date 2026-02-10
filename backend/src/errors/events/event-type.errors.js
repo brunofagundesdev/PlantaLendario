@@ -18,7 +18,7 @@ class EventTypeNotFoundError extends AppError {
     }
 }
 
-class EventTypeAlredyExistsError extends AppError {
+class EventTypeNameAlredyExistsError extends AppError {
     constructor(){
         super('Nome de tipo de evento já registrado', 400);
     }
@@ -28,5 +28,5 @@ export {
     EventTypeNameInvalidError,
     EventTypeIdInvalidError,
     EventTypeNotFoundError,
-    EventTypeAlredyExistsError
+    EventTypeNameAlredyExistsError
 }

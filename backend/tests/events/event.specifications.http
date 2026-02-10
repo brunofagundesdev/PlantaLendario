@@ -16,13 +16,13 @@ Content-Type: application/json
 }
 
 ###
-GET {{baseUrl}}/events/types/3
+GET {{baseUrl}}/events/specifications/1
 
 ###
-GET {{baseUrl}}/events/types
+GET {{baseUrl}}/events/types/2/specifications
 
 ###
-PATCH {{baseUrl}}/events/types/7
+PATCH {{baseUrl}}/events/specifications/7
 Content-Type: application/json
 
 {

@@ -1,7 +1,8 @@
 import { createEventSpecificationService } from "../../../services/events/specifications/create-event-specification.service.js"
 
 async function createEventSpecificationController(request, reply) {
-    let { typeId, name } = request.body;
+    let { typeId } = request.params;
+    let { name } = request.body;
 
     let eventSpecification = await createEventSpecificationService({ typeId, name });
 

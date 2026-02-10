@@ -4,7 +4,7 @@ async function getEventTypeByNameRepository({ name }) {
     let result = await database`
         select id, name
         from event_type
-        where lower(name) = lower(${name});
+        where name = ${name};
     `;
 
     return result[0] ?? null;
