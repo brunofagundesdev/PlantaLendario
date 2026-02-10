@@ -11,8 +11,8 @@ POST {{baseUrl}}/events/specifications
 Content-Type: application/json
 
 {
-    "typeId": 3,
-    "name": "Formato de entrega"
+    "typeId": 2,
+    "name": "Recursos"
 }
 
 ###

@@ -83,6 +83,11 @@ entity event {
   updated_at: timestamp
 }
 
+entity event_option_choice{
+  <i>**event**</i>: UUID <<pk>>
+  <i>**option**</i>: int <<pk>>
+}
+
 entity event_revision {
   **id**: UUID <<pk>>
   --
@@ -248,5 +253,8 @@ assessment }o--|| discipline
 event ||--o{ event_revision
 
 event_revision }o--|| account
+
+event ||--o{ event_option_choice
+event_option ||--o{ event_option_choice
 
 @enduml

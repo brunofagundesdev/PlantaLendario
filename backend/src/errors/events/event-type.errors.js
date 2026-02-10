@@ -8,7 +8,7 @@ class EventTypeNameInvalidError extends AppError {
 
 class EventTypeIdInvalidError extends AppError {
     constructor(){
-        super('Id inválido', 400);
+        super('Id de tipo de evento inválido', 400);
     }
 }
 

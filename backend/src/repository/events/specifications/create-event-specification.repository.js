@@ -1,8 +1,6 @@
 import { database } from "../../../infra/database.js";
 
-async function createEventSpecificationRepository({ typeId, body }) {
-    const { name } = body;
-
+async function createEventSpecificationRepository({ typeId, name }) {
     let result = await database`
         insert into event_specification(event_type, name)
         values (${typeId}, ${name})
