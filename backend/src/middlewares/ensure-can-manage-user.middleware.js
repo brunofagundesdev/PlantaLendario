@@ -1,6 +1,6 @@
 import "dotenv/config.js";
 
-import { UserNotAuthorized } from "../errors/userRoles.errors.js";
+import { UserUnauthorizedError } from "../errors/user-role.errors.js";
 
 async function ensureCanManageUser(request) {
     let jwtId = request.user?.id;
@@ -10,7 +10,7 @@ async function ensureCanManageUser(request) {
         !request.user.roles.some(role => role.id === process.env.DAVE_ID) &&
         jwtId !== requestId
     ) {
-        throw new UserNotAuthorized();
+        throw new UserUnauthorizedError();
     }
 }
 

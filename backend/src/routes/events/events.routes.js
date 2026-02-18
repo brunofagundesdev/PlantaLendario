@@ -6,9 +6,9 @@ import { createEventController } from "../../controllers/events/create-event.con
 // import { patchEventController } from "../controllers/events/patch-event.controller.js";
 
 // Type, Specifications e Options
-import { eventTypeRoutes } from "./eventTypes.routes.js";
-import { eventSpecificationRoutes } from "./eventSpecifications.routes.js";
-
+import { eventTypeRoutes } from "./event-types.routes.js";
+import { eventSpecificationRoutes } from "./event-specifications.routes.js";
+import { eventOptionRoutes } from "./event-options.routes.js";
 
 // Middlewares
 import { ensureAuthenticated } from "../../middlewares/ensure-authenticated.middleware.js";
@@ -27,7 +27,7 @@ async function eventRoutes(app) {
 
     app.register(eventTypeRoutes, { prefix: "/types" });
     app.register(eventSpecificationRoutes, { prefix: "/specifications" });
-
+    app.register(eventOptionRoutes, { prefix: "/options" });
 }
 
 export {

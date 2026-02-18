@@ -1,7 +1,7 @@
 import { createEventOptionRepository } from "../../../repository/events/options/create-event-option.repository.js";
 
 import { getEventOptionByNameRepository } from "../../../repository/events/options/get-event-option-by-name.repository.js";
-import { getEventSpecificationRepository } from "../../../repository/events/specfications/get-event-type.repository.js";
+import { getEventSpecificationRepository } from "../../../repository/events/specifications/get-event-specification.repository.js";
 
 import { validateSerial } from "../../../utils/validate-serial.js";
 import { normalizeName } from "../../../utils/normalize-name.js";

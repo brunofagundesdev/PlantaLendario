@@ -1,5 +1,5 @@
 import { getUserRepository } from "../../repository/users/get-user.repository.js";
-import { getRolesByUserIdRepository } from "../../repository/usersRoles/get-roles-by-user-id.repository.js";
+import { getRolesByUserIdRepository } from "../../repository/users-roles/get-roles-by-user-id.repository.js";
 import * as UserErrors from "../../errors/user.errors.js";
 import { validate as uuidValidate } from "uuid";
 

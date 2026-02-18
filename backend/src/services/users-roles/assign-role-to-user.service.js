@@ -1,17 +1,17 @@
-import { assignRoleRepository } from "../../repository/usersRoles/assign-role.repository.js";
+import { assignRoleRepository } from "../../repository/users-roles/assign-role-to-user.repository.js";
 
 import { getRoleRepository } from "../../repository/roles/get-role.repository.js";
 import { getUserRepository } from "../../repository/users/get-user.repository.js";
-import { getRolesByUserIdRepository } from "../../repository/usersRoles/get-roles-by-user-id.repository.js";
+import { getRolesByUserIdRepository } from "../../repository/users-roles/get-roles-by-user-id.repository.js";
 
 import { RoleIdInvalidError, RoleNotFoundError } from "../../errors/role.errors.js";
 import { UserIdInvalidError, UserNotFoundError } from "../../errors/user.errors.js";
 
-import { UserAlreadyHasRole } from "../../errors/userRoles.errors.js";
+import { UserAlreadyHasRoleError } from "../../errors/user-role.errors.js";
 
 import { validate as uuidValidate } from "uuid";
 
-async function assignRoleService({ userId, roleId }) {
+async function assignRoleToUserService({ userId, roleId }) {
 
     // User
     if (!uuidValidate(userId)) {
@@ -42,7 +42,7 @@ async function assignRoleService({ userId, roleId }) {
     let userHasRole = user.roles.some(role => role.id === roleId);
 
     if (userHasRole) {
-        throw new UserAlreadyHasRole();
+        throw new UserAlreadyHasRoleError();
     }
 
 
@@ -51,5 +51,5 @@ async function assignRoleService({ userId, roleId }) {
 }
 
 export {
-    assignRoleService
+    assignRoleToUserService
 }

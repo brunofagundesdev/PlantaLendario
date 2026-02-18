@@ -3,7 +3,7 @@ import { patchEventOptionController } from "../../controllers/events/options/pat
 import { deleteEventOptionController } from "../../controllers/events/options/delete-event-option.controller.js";
 
 
-async function eventOptionsRoutes(app) { // /events/options
+async function eventOptionRoutes(app) { // /events/options
 
     app.get("/:id", { preHandler: [] }, getEventOptionController);
     app.patch("/:id", { preHandler: [] }, patchEventOptionController);
@@ -11,5 +11,5 @@ async function eventOptionsRoutes(app) { // /events/options
 }
 
 export {
-    eventOptionsRoutes
+    eventOptionRoutes
 }

@@ -11,7 +11,7 @@ import { ensureAdmin } from "../middlewares/ensure-admin.middleware.js";
 import { ensureCanManageUser } from "../middlewares/ensure-can-manage-user.middleware.js";
 
 // Roles
-import { userRoleRoutes } from "./usersRoles.routes.js";
+import { userRoleRoutes } from "./users-roles.routes.js";
 
 async function userRoutes(app) {
 

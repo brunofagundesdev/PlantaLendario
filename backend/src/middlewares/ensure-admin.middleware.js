@@ -1,11 +1,12 @@
 import "dotenv/config.js";
 
 // Errors
-import { UserNotAuthorized } from "../errors/userRoles.errors.js";
+import { UserUnauthorizedError } from "../errors/user-role.errors.js";
 
 async function ensureAdmin(request) {
-    if (!request.user.roles.some(role => role.id === process.env.DAVE_ID)) {
-        throw new UserNotAuthorized();
+    let userHasAdminRole = request.user.roles.some(role => role.id === process.env.DAVE_ID);
+    if (!userHasAdminRole) {
+        throw new UserUnauthorizedError();
     }
 }
 
