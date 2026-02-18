@@ -1,16 +1,15 @@
 import { database } from "../../../infra/database.js";
 
-async function getEventOptionRepository({ id }) {
-
+async function getEventOptionByNameRepository({ name }) {
     let result = await database`
         select id, event_option, name
         from event_option
-        where id = ${id};
+        where name = ${name};
     `;
 
     return result[0] ?? null;
 }
 
 export {
-    getEventOptionRepository
+    getEventOptionByNameRepository
 }
