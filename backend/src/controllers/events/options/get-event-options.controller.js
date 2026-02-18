@@ -1,12 +1,12 @@
-import { getEventSpecificationsService } from "../../../services/events/options/get-event-options.service.js";
+import { getEventOptionsService } from "../../../services/events/options/get-event-options.service.js";
 
-async function getEventSpecificationsController(request, reply) {
-    let { typeId } = request.params;
-    let eventSpecifications = await getEventSpecificationsService({ typeId });
+async function getEventOptionsController(request, reply) {
+    let { specificationId } = request.params;
+    let eventOptions = await getEventOptionsService({ specificationId });
 
-    return reply.status(200).send(eventSpecifications);
+    return reply.status(200).send(eventOptions);
 }
 
 export {
-    getEventSpecificationsController
+    getEventOptionsController
 }

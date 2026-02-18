@@ -1,14 +1,14 @@
-import { createEventSpecificationService } from "../../../services/events/options/create-event-option.service.js"
+import { createEventOptionService } from "../../../services/events/options/create-event-option.service.js"
 
-async function createEventSpecificationController(request, reply) {
-    let { typeId } = request.params;
+async function createEventOptionController(request, reply) {
+    let { specificationId } = request.params;
     let { name } = request.body;
 
-    let eventSpecification = await createEventSpecificationService({ typeId, name });
+    let eventOption = await createEventOptionService({ specificationId, name });
 
-    return reply.status(201).send(eventSpecification);
+    return reply.status(201).send(eventOption);
 }
 
 export {
-    createEventSpecificationController
+    createEventOptionController
 }

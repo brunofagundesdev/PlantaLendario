@@ -1,25 +1,25 @@
-import { getEventSpecificationsRepository } from "../../../repository/events/options/get-event-options.repository.js";
+import { getEventOptionsRepository } from "../../../repository/events/options/get-event-options.repository.js";
 
-import * as EventTypeErrors from "../../../errors/events/event-type.errors.js";
+import * as EventSpecificationErrors from "../../../errors/events/event-specifications.errors.js";
 
 import { validateSerial } from "../../../utils/validate-serial.js";
-import { getEventTypeRepository } from "../../../repository/events/types/get-event-type.repository.js";
+import { getEventSpecificationRepository } from "../../../repository/events/specifications/get-event-specification.repository.js";
 
-async function getEventSpecificationsService({ typeId }) {
+async function getEventOptionsService({ specificationId }) {
 
-    if (!validateSerial(typeId)) {
-        throw new EventTypeErrors.EventTypeIdInvalidError();
+    if (!validateSerial(specificationId)) {
+        throw new EventSpecificationErrors.EventSpecificationIdInvalidError();
     }
 
-    let eventType = await getEventTypeRepository({ id: typeId });
-    if (!eventType) {
-        throw new EventTypeErrors.EventTypeNotFoundError();
+    let eventSpecification = await getEventSpecificationRepository({ id: specificationId });
+    if (!eventSpecification) {
+        throw new EventSpecificationErrors.EventSpecificationNotFoundError();
     }
 
-    let eventSpecifications = await getEventSpecificationsRepository({ typeId });
-    return eventSpecifications;
+    let eventOptions = await getEventOptionsRepository({ specificationId });
+    return eventOptions;
 }
 
 export {
-    getEventSpecificationsService
+    getEventOptionsService
 }

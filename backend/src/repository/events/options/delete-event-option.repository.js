@@ -5,7 +5,7 @@ async function deleteEventOptionRepository({ id }) {
     let result = await database`
         delete from event_option
         where id = ${id}
-        returning *;
+        returning id;
     `;
 
     return;

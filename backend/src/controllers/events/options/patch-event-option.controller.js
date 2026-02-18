@@ -2,10 +2,10 @@ import { patchEventOptionService } from "../../../services/events/options/patch-
 
 async function patchEventOptionController(request, reply) {
 
-    let { id } = request.params
-    let { name } = request.body
+    let { id } = request.params;
+    let { name } = request.body;
 
-    let eventOption = await patchEventOptionService({ id, name })
+    let eventOption = await patchEventOptionService({ id, name });
 
     return reply.status(201).send(eventOption)
 

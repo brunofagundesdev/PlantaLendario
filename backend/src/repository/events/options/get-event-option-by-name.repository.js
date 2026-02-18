@@ -2,7 +2,7 @@ import { database } from "../../../infra/database.js";
 
 async function getEventOptionByNameRepository({ name }) {
     let result = await database`
-        select id, event_option, name
+        select id, event_specification, name
         from event_option
         where name = ${name};
     `;

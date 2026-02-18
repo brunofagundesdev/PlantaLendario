@@ -1,24 +1,24 @@
-import { deleteEventSpecificationRepository } from "../../../repository/events/options/delete-event-options.repository.js";
-import { getEventSpecificationRepository } from "../../../repository/events/options/get-event-option.repository.js";
+import { deleteEventOptionRepository } from "../../../repository/events/options/delete-event-option.repository.js";
+import { getEventOptionRepository } from "../../../repository/events/options/get-event-option.repository.js";
 
 import { validateSerial } from "../../../utils/validate-serial.js";
 
-import * as EventSpecificationErrors from "../../../errors/events/event-specifications.errors.js";
+import * as EventOptionErrors from "../../../errors/events/event-options.errors.js";
 
-async function deleteEventSpecificationService({ id }) {
+async function deleteEventOptionService({ id }) {
     if (!validateSerial(id)) {
-        throw new EventSpecificationErrors.EventSpecificationIdInvalidError();
+        throw new EventOptionErrors.EventOptionIdInvalidError();
     }
 
-    let eventSpecification = await getEventSpecificationRepository({ id });
-    if (!eventSpecification) {
-        throw new EventSpecificationErrors.EventSpecificationNotFoundError();
+    let eventOption = await getEventOptionRepository({ id });
+    if (!eventOption) {
+        throw new EventOptionErrors.EventOptionNotFoundError();
     }
 
-    await deleteEventSpecificationRepository({ id });
+    await deleteEventOptionRepository({ id });
     return;
 }
 
 export {
-    deleteEventSpecificationService
+    deleteEventOptionService
 }

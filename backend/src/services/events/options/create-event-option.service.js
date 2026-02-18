@@ -1,41 +1,40 @@
-import { createEventSpecificationRepository } from "../../../repository/events/options/create-event-options.repository.js";
+import { createEventOptionRepository } from "../../../repository/events/options/create-event-option.repository.js";
 
-import { getEventSpecificationByNameRepository } from "../../../repository/events/options/get-event-option-by-name.repository.js";
-import { getEventTypeRepository } from "../../../repository/events/types/get-event-type.repository.js";
+import { getEventOptionByNameRepository } from "../../../repository/events/options/get-event-option-by-name.repository.js";
+import { getEventSpecificationRepository } from "../../../repository/events/specfications/get-event-type.repository.js";
 
 import { validateSerial } from "../../../utils/validate-serial.js";
 import { normalizeName } from "../../../utils/normalize-name.js";
 import { validateName } from "../../../utils/validate-name.js";
 
-import * as EventSpecificationErrors from "../../../errors/events/event-options.errors.js";
-import { EventTypeIdInvalidError, EventTypeNotFoundError } from "../../../errors/events/event-type.errors.js";
+import * as EventOptionErrors from "../../../errors/events/event-options.errors.js";
+import { EventSpecificationIdInvalidError, EventSpecificationNotFoundError } from "../../../errors/events/event-specifications.errors.js";
 
-async function createEventSpecificationService({ typeId, name }) {
-
-    if (!validateSerial(typeId)) {
-        throw new EventTypeIdInvalidError();
+async function createEventOptionService({ specificationId, name }) {
+    if (!validateSerial(specificationId)) {
+        throw new EventSpecificationIdInvalidError();
     }
 
-    let eventType = await getEventTypeRepository({ id: typeId });
-    if (!eventType) {
-        throw new EventTypeNotFoundError();
+    let eventSpecification = await getEventSpecificationRepository({ id: specificationId });
+    if (!eventSpecification) {
+        throw new EventSpecificationNotFoundError();
     }
 
     let normalizedName = normalizeName(name).toLowerCase();
     if (!validateName(normalizedName)) {
-        throw new EventSpecificationErrors.EventSpecificationNameInvalidError();
+        throw new EventOptionErrors.EventOptionNameInvalidError();
     }
 
-    let existingEventSpecification = await getEventSpecificationByNameRepository({ name: normalizedName });
-    if (existingEventSpecification) {
-        throw new EventSpecificationErrors.EventSpecificationNameAlredyExistsError();
+    let existingEventOption = await getEventOptionByNameRepository({ name: normalizedName });
+    if (existingEventOption) {
+        throw new EventOptionErrors.EventOptionNameAlredyExistsError();
     }
 
-    let eventSpecification = await createEventSpecificationRepository({ typeId, name: normalizedName });
-    return eventSpecification;
+    let eventOption = await createEventOptionRepository({ specificationId, name: normalizedName });
+    return eventOption;
 }
 
 
 export {
-    createEventSpecificationService
+    createEventOptionService
 }
