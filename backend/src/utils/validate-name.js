@@ -1,10 +1,15 @@
-function validateName(name) {
-    if (typeof name !== 'string') {
-        return false;
-    }
-    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/;
+function validateName(name, { testNumber = true } = {}) {
+    if (typeof name !== 'string') return false;
 
-    return regex.test(name.trim());
+    name = name.trim();
+
+    let isValid = true;
+    if (testNumber) {
+        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/;
+        isValid = regex.test(name);
+    }
+
+    return isValid;
 
 }
 

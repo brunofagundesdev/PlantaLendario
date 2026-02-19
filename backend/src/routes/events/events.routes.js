@@ -1,8 +1,8 @@
 // Controllers
 import { createEventController } from "../../controllers/events/create-event.controller.js";
 // import { deleteEventController } from "../controllers/events/delete-event.controller.js";
-// import { getEventsController } from "../controllers/events/get-events.controller.js";
-// import { getEventController } from "../controllers/events/get-event.controller.js";
+// import { getEventsController } from "../../controllers/events/get-events.controller.js";
+import { getEventController } from "../../controllers/events/get-event.controller.js";
 // import { patchEventController } from "../controllers/events/patch-event.controller.js";
 
 // Type, Specifications e Options
@@ -19,9 +19,9 @@ async function eventRoutes(app) {
 
     //CRUD
     // app.get("/", { preHandler: [] }, getEventsController);
-    // app.get("/:id", { preHandler: [] }, getEventController);
+    app.get("/:id", { preHandler: [] }, getEventController);
 
-    // app.post("/", { preHandler: [] }, createEventController);
+    app.post("/", { preHandler: [] }, createEventController);
     // app.patch("/:id", { preHandler: [] }, patchEventController);
     // app.delete("/:id", { preHandler: [] }, deleteEventController);
 

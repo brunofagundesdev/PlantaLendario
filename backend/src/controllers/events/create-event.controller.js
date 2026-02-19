@@ -1,27 +1,53 @@
-
+import { createEventService } from "../../services/events/create-event.service.js";
 
 async function createEventController(request, reply) {
-    
+
+    let {
+        // event
+        title,
+        description,
+        typeId,
+
+        assessment,
+
+        schedule,
+
+        filesId
+    } = request.body;
+
+    let createdEvent = await createEventService({
+        title,
+        description,
+        typeId,
+        assessment,
+        schedule,
+        filesId
+    });
+
+    return reply.status(201).send(createdEvent);
 }
 
 export {
     createEventController
 }
 
-// let a = {
+// {
 //     id,
 //     title,
 //     description,
 //     type,
 //     // se for evento em uma data(s) especifica
-//     date,
-//     timetable,
-//     location,
+//     schedule
+//         date,
+//         timetable,
+//         location,
 
 //     // se for avaliacao
-//     discipline,
-//     weight,
-//     trimester,
+//     assessment: {
+//         discipline,
+//         weight,
+//         trimester,
 //         // se tiver aula vinculada
 //         lesson
+//     }
 // }

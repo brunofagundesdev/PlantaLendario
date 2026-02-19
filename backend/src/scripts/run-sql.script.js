@@ -11,7 +11,7 @@ const { database } = await import("../infra/database.js");
 
 import fs from "fs";
 
-function runSQL(archive) {
+async function runSQL(archive) {
   const schemaPath = path.join(__dirname, ...archive.split("/"));
   const schema = fs.readFileSync(schemaPath, "utf-8");
 
@@ -20,4 +20,4 @@ function runSQL(archive) {
     .catch(console.error);
 }
 
-runSQL("../../../database/updates/event-option-choice.sql");
+await runSQL("../../../database/updates/event-title-not-null.sql");

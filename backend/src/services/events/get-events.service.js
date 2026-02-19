@@ -1,7 +1,9 @@
-//import 
-function getEvents() {
+import { getEventsRepository } from "../../repository/events/get-events.repository.js";
+
+async function getEventsService() {
+    
 }
 
 export {
-    getEvents,
+    getEventsService
 }

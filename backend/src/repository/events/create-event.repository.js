@@ -1,6 +1,11 @@
-// sql puro
 import { database } from "../../infra/database.js";
 
-export function createEvent(event){
-    // database`insert into event`
+async function createEventRepository() {
+    let result = await database`
+        insert into event
+    `;
+}
+
+export {
+    createEventRepository
 }
