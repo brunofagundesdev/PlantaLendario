@@ -2,7 +2,7 @@ function normalizeName(name, { trim = true, accentuation = false, duplicatedSpac
 
     if (trim) name = name.trim();
     if (!accentuation) name = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    if (!duplicatedSpaces) name = name.replaceAll("  ", " ");
+    if (!duplicatedSpaces) while (name.includes("  ")) name = name.replaceAll("  ", " ");
     if (lowerCase) name = name.toLowerCase(); 
 
     return name;

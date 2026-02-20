@@ -6,7 +6,7 @@ import { getUserByEmailRepository } from "../../repository/users/get-user-by-ema
 
 import bcrypt from "bcrypt";
 import { validate as uuidValidate } from "uuid";
-import { isValidEmail } from "../../utils/validate-email.js";
+import { validateEmail } from "../../utils/validate-email.js";
 
 import { normalizeName } from "../../utils/normalize-name.js";
 import { normalizeEmail } from 'email-normalizer';
@@ -52,7 +52,7 @@ export async function patchUserService({ id, body = {} }) {
     if (email != null) {
         normalizedEmail = normalizeEmail({ email });
 
-        if (!isValidEmail({ email: normalizedEmail })) {
+        if (!validateEmail({ email: normalizedEmail })) {
             throw new UserErrors.UserEmailInvalidError();
         }
 

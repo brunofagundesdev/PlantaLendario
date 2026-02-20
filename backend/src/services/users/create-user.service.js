@@ -4,7 +4,7 @@ import { getUserByEmailRepository } from "../../repository/users/get-user-by-ema
 import { getUserByNameRepository } from "../../repository/users/get-user-by-name.repository.js";
 
 import bcrypt from "bcrypt";
-import { isValidEmail } from "../../utils/validate-email.js";
+import { validateEmail } from "../../utils/validate-email.js";
 
 import { normalizeName } from "../../utils/normalize-name.js";
 import { normalizeEmail } from 'email-normalizer';
@@ -34,7 +34,7 @@ export async function createUserService({ name, email, password }) { // Object
     //Email
     let normalizedEmail = normalizeEmail({ email });
 
-    if (!isValidEmail({ email })) {
+    if (!validateEmail({ email })) {
         throw new UserErrors.UserEmailInvalidError();
     }
 

@@ -20,4 +20,4 @@ async function runSQL(archive) {
     .catch(console.error);
 }
 
-await runSQL("../../../database/updates/event-title-not-null.sql");
+await runSQL("../../../database/updates/discipline-teacher.sql");

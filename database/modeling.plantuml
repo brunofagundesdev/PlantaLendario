@@ -208,7 +208,13 @@ entity list {
   updated_at: timestamp
 }
 
-discipline }|--|| teacher
+entity discipline_teacher {
+  <i>**discipline**</i> int <<pk>> <<fk>>
+  <i>**teacher**</i> int <<pk>> <<fk>>
+}
+
+discipline ||--o{ discipline_teacher
+teacher ||--o{ discipline_teacher
 lesson }|--|| discipline
 register }o--|| location
 register |o--|| lesson 
