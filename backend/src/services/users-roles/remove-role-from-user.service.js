@@ -1,14 +1,14 @@
-import { removeRoleFromUserRepository } from "../../repository/users-roles/remove-role-from-user.repository.js";
+import { removeRoleFromUserRepository } from "../../repositories/users-roles/remove-role-from-user.repository.js";
 
-import { getUserRepository } from "../../repository/users/get-user.repository.js";
-import { getRoleRepository } from "../../repository/roles/get-role.repository.js";
+import { getUserRepository } from "../../repositories/users/get-user.repository.js";
+import { getRoleRepository } from "../../repositories/roles/get-role.repository.js";
 
 import * as UserErrors from "../../errors/user.errors.js";
 import * as RoleErrors from "../../errors/role.errors.js";
 import * as UserRoleErrors from "../../errors/user-role.errors.js";
 
 import { validate as uuidValidate } from "uuid";
-import { getRolesByUserIdRepository } from "../../repository/users-roles/get-roles-by-user-id.repository.js";
+import { getRolesByUserIdRepository } from "../../repositories/users-roles/get-roles-by-user-id.repository.js";
 
 async function removeRoleFromUserService({ userId, roleId }) {
 

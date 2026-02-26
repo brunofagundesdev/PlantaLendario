@@ -30,6 +30,8 @@ Middleware (auth, etc)
  ↓
 Controller
  ↓
+Validator
+ ↓
 Service
  ↓
 Database

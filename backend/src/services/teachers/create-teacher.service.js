@@ -8,10 +8,12 @@ import { validateName } from "../../utils/validate-name.js";
 import { normalizeEmail } from "email-normalizer";
 import { validateEmail } from "../../utils/validate-email.js";
 
+import parsePhoneNumber, { isValidPhoneNumber } from "libphonenumber-js";
+
 import * as TeacherErrors from "../../errors/teacher.errors.js";
 
-async function createTeacherService({ name, email, telephone }) {
-
+async function createTeacherService({ name, email = null, telephone = null }) {
+    // Name
     if (!validateName(name)) {
         throw new TeacherErrors.TeacherNameInvalidError();
     }
@@ -25,10 +27,30 @@ async function createTeacherService({ name, email, telephone }) {
         throw new TeacherErrors.TeacherNameAlredyExistsError();
     }
 
-    if (!validateEmail({ email })) {
-        throw new TeacherErrors.TeacherEmailInvalidError();
+    // Email
+    let normalizedEmail;
+    if (email) {
+        
+        if (!validateEmail({ email })) {
+            throw new TeacherErrors.TeacherEmailInvalidError();
+        }
+        normalizedEmail = normalizeEmail({ email });
     }
-    let normalizedEmail = normalizeEmail({ email });
+
+
+    // Telephone
+    let normalizedTelephone;
+    if (telephone) {
+        if (!isValidPhoneNumber(telephone, "BR")) {
+            throw new TeacherErrors.TeacherTelephoneInvalidError();
+        }
+        normalizedTelephone = parsePhoneNumber(telephone, "BR").number;
+    }
+
+
+
+
+    console.log(normalizedName, normalizedEmail, normalizedTelephone)
 
 
 

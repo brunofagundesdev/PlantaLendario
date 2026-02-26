@@ -1,8 +1,8 @@
-import { assignRoleRepository } from "../../repository/users-roles/assign-role-to-user.repository.js";
+import { assignRoleRepository } from "../../repositories/users-roles/assign-role-to-user.repository.js";
 
-import { getRoleRepository } from "../../repository/roles/get-role.repository.js";
-import { getUserRepository } from "../../repository/users/get-user.repository.js";
-import { getRolesByUserIdRepository } from "../../repository/users-roles/get-roles-by-user-id.repository.js";
+import { getRoleRepository } from "../../repositories/roles/get-role.repository.js";
+import { getUserRepository } from "../../repositories/users/get-user.repository.js";
+import { getRolesByUserIdRepository } from "../../repositories/users-roles/get-roles-by-user-id.repository.js";
 
 import { RoleIdInvalidError, RoleNotFoundError } from "../../errors/role.errors.js";
 import { UserIdInvalidError, UserNotFoundError } from "../../errors/user.errors.js";

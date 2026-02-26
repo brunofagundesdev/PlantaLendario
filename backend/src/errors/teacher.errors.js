@@ -16,6 +16,11 @@ class TeacherEmailInvalidError extends AppError {
         super('Email de professor inválido', 400);
     }
 }
+class TeacherTelephoneInvalidError extends AppError {
+    constructor(){
+        super('Telefone de professor inválido', 400);
+    }
+}
 
 class TeacherNotFoundError extends AppError {
     constructor(){
@@ -33,6 +38,7 @@ export {
     TeacherIdInvalidError,
     TeacherNameInvalidError,
     TeacherEmailInvalidError,
+    TeacherTelephoneInvalidError,
     TeacherNotFoundError,
     TeacherNameAlredyExistsError
 }

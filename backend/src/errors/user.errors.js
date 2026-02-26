@@ -2,19 +2,19 @@ import { AppError } from './appError.error.js';
 
 class UserEmailDuplicatedError extends AppError {
   constructor() {
-    super('Email já registrado no sistema', 409);
+    super('Email de usuário já registrado', 409);
   }
 }
 
 class UserEmailInvalidError extends AppError {
   constructor() {
-    super('Email inválido', 400);
+    super('Email de usuário inválido', 400);
   }
 }
 
 class UserNameInvalidError extends AppError {
   constructor() {
-    super('Nome inválido', 400);
+    super('Nome de usuário inválido', 400);
   }
 }
 
@@ -26,7 +26,7 @@ class UserNameAlredyExistsError extends AppError{
 
 class UserIdInvalidError extends AppError {
   constructor() {
-    super('Id inválido', 400);
+    super('Id de usuário inválido', 400);
   }
 }
 
@@ -62,11 +62,7 @@ class InvalidUserOffsetError extends AppError {
   }
 }
 
-class InvalidUserPutError extends AppError {
-  constructor(){
-    super('Todos os campos obrigatórios devem ser preenchidos.' ,400);
-  }
-}
+
 class InvalidUserPatchError extends AppError {
   constructor(){
     super('Pelo menos um campo válido deve ser fornecido.' ,400);
@@ -82,7 +78,6 @@ export {
   InvalidUserOrderError,
   InvalidUserLimitError,
   InvalidUserOffsetError,
-  InvalidUserPutError,
   InvalidUserPatchError,
   UserNameInvalidError,
   UserNameAlredyExistsError

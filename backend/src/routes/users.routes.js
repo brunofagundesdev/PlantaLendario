@@ -1,9 +1,5 @@
-// Controllers
-import { createUserController } from "../controllers/users/create-user.controller.js";
-import { deleteUserController } from "../controllers/users/delete-user.controller.js";
-import { getUsersController } from "../controllers/users/get-users.controller.js";
-import { getUserController } from "../controllers/users/get-user.controller.js";
-import { patchUserController } from "../controllers/users/patch-user.controller.js";
+// Controller
+import userController from "../controllers/user.controller.js";
 
 // Middlewares
 import { ensureAuthenticated } from "../middlewares/ensure-authenticated.middleware.js";
@@ -16,12 +12,12 @@ import { userRoleRoutes } from "./users-roles.routes.js";
 async function userRoutes(app) {
 
     //CRUD
-    app.get("/", { preHandler: [ensureAuthenticated, ensureAdmin] }, getUsersController);
-    app.get("/:id", { preHandler: [ensureAuthenticated, ensureCanManageUser] }, getUserController);
+    app.post("/", { preHandler: [] }, userController.create);
+    app.get("/:id", { preHandler: [ensureAuthenticated, ensureCanManageUser] }, userController.list);
+    app.get("/", { preHandler: [ensureAuthenticated, ensureAdmin] }, userController.get);
 
-    app.post("/", { preHandler: [] }, createUserController);
-    app.patch("/:id", { preHandler: [ensureAuthenticated, ensureCanManageUser] }, patchUserController);
-    app.delete("/:id", { preHandler: [ensureAuthenticated, ensureCanManageUser] }, deleteUserController);
+    app.patch("/:id", { preHandler: [ensureAuthenticated, ensureCanManageUser] }, userController.update);
+    app.delete("/:id", { preHandler: [ensureAuthenticated, ensureCanManageUser] }, userController.delete);
 
     // Roles
     app.register(userRoleRoutes, { prefix: "/:id/roles" });
