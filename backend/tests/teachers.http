@@ -1,4 +1,4 @@
-@bruninToken = eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSIsInJvbGVzIjpbeyJpZCI6IjIxZTZkMjYyLWU4YjgtNGExYS1iNDc3LWU0YTA4ZmJmMzdhNyJ9XX0.6EVYafaDOjBZipbnM3mX3eF0y0pnA-okYEFGTRHTd3M
+@bruninToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSIsInJvbGVzIjpbeyJpZCI6IjIxZTZkMjYyLWU4YjgtNGExYS1iNDc3LWU0YTA4ZmJmMzdhNyJ9LHsiaWQiOiJjYmFmNmRjMS03MzBiLTQ5ZjctODExNS04OTZmYTY4MGNkOGEifV19.ZID1utrLbgkjScTuIRxmNJzpYQ463uNkWEger8UoZNs
 @bruninId = da04e53b-7c5e-4c43-b7a3-1428cf6ef791
 @madonoId = f1f229aa-f477-436d-a63b-38dd3d521e3a
 
@@ -8,8 +8,17 @@
 
 POST {{baseUrl}}/teachers
 Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
 
-{
-    "name": "Nicolle Ruppentall",
-    "email": "nicolle.ruppentall@riogrande.ifrs.edu.br",
+{   
+    "name": 1
+}
+
+###
+PATCH {{baseUrl}}/teachers/2f8ec483-611e-499b-9f9b-8ff54d48eab4
+Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
+
+{   
+    "telephone": "6996969696"
 }

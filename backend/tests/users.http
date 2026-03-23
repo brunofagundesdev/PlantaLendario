@@ -1,4 +1,4 @@
-@bruninToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSIsIm5hbWUiOiJCcnVubyBGYWd1bmRlcyIsImVtYWlsIjoiYnJ1bmluOTI5OEBnbWFpbC5jb20iLCJyb2xlcyI6W3siaWQiOiIyMWU2ZDI2Mi1lOGI4LTRhMWEtYjQ3Ny1lNGEwOGZiZjM3YTciLCJuYW1lIjoicGxhbnRhIiwiY29sb3IiOiIjNzlCODIyIn1dfQ.IVaScrxT9Rz0l8XW0HEKdMRVIvNEvP1IXX6-5CKxaRs
+@bruninToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSIsInJvbGVzIjpbeyJpZCI6IjIxZTZkMjYyLWU4YjgtNGExYS1iNDc3LWU0YTA4ZmJmMzdhNyJ9LHsiaWQiOiJjYmFmNmRjMS03MzBiLTQ5ZjctODExNS04OTZmYTY4MGNkOGEifV19.ZID1utrLbgkjScTuIRxmNJzpYQ463uNkWEger8UoZNs
 @bruninId = da04e53b-7c5e-4c43-b7a3-1428cf6ef791
 @madonoId = f1f229aa-f477-436d-a63b-38dd3d521e3a
 
@@ -34,6 +34,7 @@ Authorization: Bearer {{bruninToken}}
 ### =========================
 GET http://localhost:3333/users/123
 Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
 
 
 
@@ -43,11 +44,12 @@ Content-Type: application/json
 ### =========================
 POST http://localhost:3333/users
 Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
 
 {
-  "name": 123,
-  "email": "pauzao@gmail.com",
-  "password": "asoiyabsdi"
+  "name": "Alissong",
+  "email": "alisson@gmail.com",
+  "password": "iwehriowberwoirhwbeorih"
 }
 
 

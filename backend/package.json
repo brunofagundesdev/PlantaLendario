@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend do projeto Plantalendário, responsável por: - autenticação de usuários - regras de acesso - comunicação com o banco de dados (Neon) - proteção das rotas da aplicação",
-  "main": "src/server.js",
+  "main": "source/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js",
-    "dev": "node --watch --no-warnings src/server.js"
+    "start": "node source/server.js",
+    "dev": "node --watch --no-warnings source/server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +15,11 @@
   "dependencies": {
     "@brazilian-utils/brazilian-utils": "^1.1.0",
     "bcrypt": "^6.0.0",
+    "chroma-js": "^3.2.0",
     "email-normalizer": "^1.0.0",
     "fastify": "^5.6.2",
     "jsonwebtoken": "^9.0.3",
-    "libphonenumber-js": "^1.12.37",
+    "libphonenumber-js": "^1.12.38",
     "postgres": "^3.4.7",
     "uuid": "^13.0.0"
   },

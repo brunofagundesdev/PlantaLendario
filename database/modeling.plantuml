@@ -104,7 +104,6 @@ entity discipline {
   **id**: SERIAL <<pk>>
   --
   name: varchar(100)
-  <i>teacher</i>: UUID <<fk>>
 }
 
 entity location {
@@ -241,7 +240,6 @@ schedule }o--|| location
 schedule }o--|| timetable
 
 discipline ||--o{ list
-announcement }o--o{ file
 list ||--o| file
 
 event ||--o{ event_file

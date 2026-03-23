@@ -40,7 +40,6 @@ Postgres
 
 arrumar:
 nome de usuario algo nao string fudido
-campos com valores duplicados na porra toda
 
 
 cargos:
