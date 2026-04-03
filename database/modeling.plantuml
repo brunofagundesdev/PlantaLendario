@@ -194,11 +194,12 @@ entity announcement_file {
   <i>file</i>: UUID <<fk>>
 }
 
-entity list {
+entity resource {
   **id**: UUID <<pk>>
   --
   title: varchar(150)
   description: text
+  type: text
   <i>file</i>: UUID <<fk>>
   <i>discipline</i>: int <<fk>>
   created_at: timestamp
@@ -239,8 +240,8 @@ event ||--o{ schedule
 schedule }o--|| location
 schedule }o--|| timetable
 
-discipline ||--o{ list
-list ||--o| file
+discipline ||--o{ resource
+resource ||--o| file
 
 event ||--o{ event_file
 file ||--o{ event_file
@@ -251,7 +252,7 @@ file ||--o{ announcement_file
 discipline ||--o{ discipline_file
 file ||--|| discipline_file
 
-list }o--|| account
+resource }o--|| account
 assessment }o--|| discipline
 
 event ||--o{ event_revision

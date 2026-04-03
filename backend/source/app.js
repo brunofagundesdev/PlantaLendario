@@ -7,8 +7,8 @@ import { roleRoute } from "./modules/role/role.route.js";
 import { teacherRoute } from "./modules/teacher/teacher.route.js";
 import { authRoute } from "./auth/auth.route.js";
 import { announcementRoute } from "./modules/announcement/announcement.route.js";
-// import { disciplineRoutes } from "./routes/disciplines.routes.js";
-// import { lessonsRoutes } from "./routes/disciplines.routes.js";
+import { disciplineRoute } from "./modules/discipline/discipline.route.js";
+import { locationRoute } from "./modules/location/location.route.js";
 
 const app = fastify({
   ignoreTrailingSlash: true
@@ -22,5 +22,7 @@ app.register(authRoute, { prefix: "/auth" });
 app.register(roleRoute, { prefix: "/roles" });
 app.register(teacherRoute, { prefix: "/teachers" });
 app.register(announcementRoute, { prefix: "/announcements" });
+app.register(disciplineRoute, { prefix: "/disciplines" });
+app.register(locationRoute, { prefix: "/locations" });
 
 export default app;

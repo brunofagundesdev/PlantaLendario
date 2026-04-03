@@ -13,8 +13,8 @@ class RoleService {
             throw new RoleErrors.RoleNameAlredyRegisteredError();
         }
 
-        
-
+        let createdRole = await this.repository.create({ data });
+        return createdRole;
     }
 
     async get({ id }) {

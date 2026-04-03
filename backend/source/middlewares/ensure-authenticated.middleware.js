@@ -17,7 +17,7 @@ async function ensureAuthenticated(request) {
 
     let payload = JWT.verify(token);
     request.user = payload;
-    console.log(request.user)
+    // console.log(request.user)
 }
 
 export {

@@ -1,13 +1,13 @@
 import { database } from "../../infra/database.js";
 
-class DisciplineRepository {
+class ResourceRepository {
     constructor({ database }) {
         this.database = database;
     }
 
     async create({ data }) {
         const result = await this.database`
-            insert into discipline ${this.database(data)}
+            insert into resource ${this.database(data)}
             returning id;
         `;
         return result;
@@ -15,8 +15,8 @@ class DisciplineRepository {
 
     async get({ criteria }) {
         let [result] = await this.database`
-            select id, name
-            from discipline
+            select id, title, description, created_at, created_by, updated_at, updated_by
+            from resource
             where ${this.database.buildConditions(criteria)}
             limit 1;
         `;
@@ -25,16 +25,16 @@ class DisciplineRepository {
 
     async list() {
         let [result] = await this.database`
-            select id, name
-            from discipline;
+            select id, title, description, created_at, created_by, updated_at, updated_by 
+            from resource;
         `;
         return result;
     }
 
     async update({ id, data }) {
         let [result] = await this.database`
-            update discipline
-            set ${this.database(data)}
+            update resource
+            set ${this.database(data)}, updated_at = now()
             where id = ${id}
             returning id;
         `;
@@ -43,7 +43,7 @@ class DisciplineRepository {
 
     async delete({ id }) {
         let [result] = await this.database`
-            delete from discipline
+            delete from resource
             where id = ${id}
             returning id;
         `;
@@ -51,5 +51,5 @@ class DisciplineRepository {
     }
 }
 
-const disciplineRepository = new DisciplineRepository({ database: database });
-export default disciplineRepository;
+const resourceRepository = new ResourceRepository({ database: database });
+export default resourceRepository;

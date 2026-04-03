@@ -281,7 +281,7 @@ Esse encadeamento permite classificar eventos de forma flexível e extensível, 
 
 * `event` ↔ `file` (N:N) via `event_file`
 * `discipline` ↔ `file` (N:N) via `discipline_file`
-* `list` ↔ `file` (N:N)
+* `list` ↔ `file` (1:1)
 
 Arquivos são sempre associados por tabelas intermediárias para evitar acoplamento direto.
 

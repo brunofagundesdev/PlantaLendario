@@ -1,4 +1,4 @@
-import disciplineTeacherController from "./user-role.controller.js";
+import disciplineTeacherController from "./discipline-teacher.controller.js";
 // import ensureAdmin
 import { ensureAuthenticated } from "../../middlewares/ensure-authenticated.middleware.js";
 import { ensureAdmin } from "../../middlewares/ensure-admin.middleware.js";
