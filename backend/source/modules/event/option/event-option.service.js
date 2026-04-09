@@ -35,7 +35,7 @@ class EventOptionService {
     }
 
     async list({ specificationId }) {
-        let caughtEventSpecification = await this.dependencies.eventOptionRepository.get({ criteria: { id: specificationId } });
+        let caughtEventSpecification = await this.dependencies.eventSpecificationRepository.get({ criteria: { id: specificationId } });
         if (!caughtEventSpecification) {
             throw new EventOptionErrors.EventOptionNotFoundError();
         }

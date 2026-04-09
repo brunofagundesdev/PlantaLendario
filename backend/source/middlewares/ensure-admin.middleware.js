@@ -1,15 +1,11 @@
 import "dotenv/config.js";
 
 // Errors
-import { UserUnauthorizedError } from "../modules/user-role/user-role.error.js";
+import * as UserRoleErrors from "../modules/user-role/user-role.error.js";
 
-async function ensureAdmin(request) {
+export default async function ensureAdmin(request) {
     let userHasAdminRole = request.user.roles.some(role => role.id === process.env.DAVE_ID);
     if (!userHasAdminRole) {
-        throw new UserUnauthorizedError();
+        throw new UserRoleErrors.UserUnauthorizedError();
     }
-}
-
-export {
-    ensureAdmin
 }

@@ -7,8 +7,8 @@ class LocationRepository {
     }
 
     async create({ data }) {
-        const result = await this.database`
-            insert into discipline ${this.database(CaseTransform.camelToSnake(data))}
+        const [result] = await this.database`
+            insert into location ${this.database(CaseTransform.camelToSnake(data))}
             returning id;
         `;
         return result;
@@ -21,7 +21,7 @@ class LocationRepository {
             where ${this.database.buildQuery(CaseTransform.camelToSnake(criteria))}
             limit 1;
         `;
-        return result ?? null;
+        return CaseTransform.snakeToCamel(result) ?? null;
     }
 
     async list() {
@@ -39,7 +39,7 @@ class LocationRepository {
             where id = ${id}
             returning id;
         `;
-        return result;
+        return CaseTransform.snakeToCamel(result);
     }
 
     async delete({ id }) {
@@ -48,7 +48,7 @@ class LocationRepository {
             where id = ${id}
             returning id;
         `;
-        return result;
+        return CaseTransform.snakeToCamel(result);
     }
 }
 

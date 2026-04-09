@@ -20,4 +20,4 @@ async function runSQL(archive) {
     .catch(console.error);
 }
 
-await runSQL("../../../database/updates/list-to-resource.sql");
+await runSQL("../../../database/updates/resource-type.sql");

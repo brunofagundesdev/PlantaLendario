@@ -2,7 +2,7 @@ import "dotenv/config.js";
 
 import { UserUnauthorizedError } from "../modules/user-role/user-role.error.js";
 
-async function ensureCanManageUser(request) {
+export default async function ensureCanManageUser(request) {
     let jwtId = request.user?.id;
     let requestId = request.params.id;
 
@@ -12,8 +12,4 @@ async function ensureCanManageUser(request) {
     ) {
         throw new UserUnauthorizedError();
     }
-}
-
-export {
-    ensureCanManageUser
 }

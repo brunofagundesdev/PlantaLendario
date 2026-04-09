@@ -23,7 +23,7 @@ class AnnouncementController {
         let sanitized = AnnouncementSanitizer.parseGet({ id });
 
         let caughtAnnouncement = await announcementService.get(sanitized);
-        return reply.status(204).send(caughtAnnouncement);
+        return reply.status(200).send(caughtAnnouncement);
     }
 
     async list(request, reply) {

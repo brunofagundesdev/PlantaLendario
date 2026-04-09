@@ -19,7 +19,7 @@ class EventTypeController {
     async get(request, reply) {
         let { id } = request.params;
 
-        let sanitized = await EventTypeSanitizer.parseGet({ id });
+        let sanitized = EventTypeSanitizer.parseGet({ id });
         let caughtEventType = await eventTypeService.get(sanitized);
 
         return reply.status(200).send(caughtEventType);
@@ -43,7 +43,7 @@ class EventTypeController {
     async delete(request, reply) {
         let { id } = request.params;
 
-        let sanitized = await EventTypeSanitizer.parseDelete({ id });
+        let sanitized = EventTypeSanitizer.parseDelete({ id });
         let deletedEventType = await eventTypeService.delete(sanitized);
 
         return reply.status(204).send();

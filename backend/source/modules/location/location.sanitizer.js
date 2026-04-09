@@ -29,6 +29,11 @@ export default class LocationSanitizer extends BaseSanitizer {
 
         if (data.name !== undefined) {
             parsed.data.name = this.parseName(data.name);
+            parsed.data.normalizedName = this.parseNormalizeName(data.name);
+        }
+
+        if (data.parentId !== undefined) {
+            parsed.data.parentId = this.parseId(data.parentId);
         }
 
         if (data.type !== undefined) {
@@ -52,9 +57,10 @@ export default class LocationSanitizer extends BaseSanitizer {
     // ==================================================================
 
     static parseId(id) {
-        if (typeof id !== "string") {
+        if (!["string", "number"].includes(typeof id)) {
             throw new LocationErrors.LocationIdInvalidError();
         }
+        id = this.normalizeId(id);
         this.validadeId(id);
         return id;
     }
@@ -73,6 +79,7 @@ export default class LocationSanitizer extends BaseSanitizer {
         if (typeof type !== "string") {
             throw new LocationErrors.LocationTypeInvalidError();
         }
+        type = this.normalizeName(type, { lowerCase: true });
         return type;
     }
 
@@ -102,4 +109,8 @@ export default class LocationSanitizer extends BaseSanitizer {
 
     // =============================================================
 
+    static normalizeId(id) {
+        id = Number(id);
+        return id;
+    }
 }

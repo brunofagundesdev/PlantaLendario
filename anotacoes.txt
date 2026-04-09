@@ -30,9 +30,11 @@ Middleware (auth, etc)
  ↓
 Controller
  ↓
-Validator
+Sanitizer
  ↓
 Service
+ ↓
+Repository
  ↓
 Database
  ↓

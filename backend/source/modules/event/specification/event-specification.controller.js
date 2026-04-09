@@ -19,7 +19,7 @@ class EventSpecificationController {
     async get(request, reply) {
         let { id } = request.params;
 
-        let sanitized = await EventSpecificationSanitizer.parseGet({ id });
+        let sanitized = EventSpecificationSanitizer.parseGet({ id });
         let caughtEventSpecification = await eventSpecificationService.get(sanitized);
 
         return reply.status(200).send(caughtEventSpecification);
@@ -44,10 +44,10 @@ class EventSpecificationController {
     async delete(request, reply) {
         let { id } = request.params;
 
-        let sanitized = await EventSpecificationSanitizer.parseDelete({ id });
+        let sanitized = EventSpecificationSanitizer.parseDelete({ id });
         let deletedEventSpecification = await eventSpecificationService.delete(sanitized);
 
-        return reply.status(204).send();
+        return reply.status(204).send(deletedEventSpecification);
     }
 }
 

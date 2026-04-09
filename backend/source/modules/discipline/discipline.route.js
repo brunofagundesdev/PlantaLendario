@@ -2,12 +2,12 @@
 import disciplineController from "./discipline.controller.js";
 
 // // Middlewares
-import { ensureAuthenticated } from "../../middlewares/ensure-authenticated.middleware.js";
-import { ensureAdmin } from "../../middlewares/ensure-admin.middleware.js";
+import ensureAuthenticated from "../../middlewares/ensure-authenticated.middleware.js";
+import ensureAdmin from "../../middlewares/ensure-admin.middleware.js";
 
-import { disciplineTeacherRoute } from "../discipline-teacher/discipline-teacher.route.js";
+import disciplineTeacherRoute from "../discipline-teacher/discipline-teacher.route.js";
 
-function disciplineRoute(app) {
+export default function disciplineRoute(app) {
 
     app.post("/", { preHandler: [ensureAuthenticated, ensureAdmin] }, disciplineController.create);
     app.get("/:id", { preHandler: [ensureAuthenticated] }, disciplineController.get);
@@ -16,8 +16,4 @@ function disciplineRoute(app) {
     app.delete("/:id", { preHandler: [ensureAuthenticated, ensureAdmin] }, disciplineController.delete);
 
     app.register(disciplineTeacherRoute, { prefix: "/:disciplineId/teachers" })
-}
-
-export {
-    disciplineRoute
 }

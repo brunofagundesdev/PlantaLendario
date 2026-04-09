@@ -28,7 +28,7 @@ class DisciplineController {
         let sanitized = DisciplineSanitizer.parseGet({ id });
 
         let caughtDiscipline = await disciplineService.get(sanitized);
-        return reply.status(204).send(caughtDiscipline);
+        return reply.status(200).send(caughtDiscipline);
     }
 
     async list(request, reply) {

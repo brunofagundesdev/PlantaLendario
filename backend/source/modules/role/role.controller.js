@@ -28,7 +28,7 @@ class RoleController {
         let sanitized = RoleSanitizer.parseGet({ id });
 
         let caughtRole = await roleService.get(sanitized);
-        return reply.status(204).send(caughtRole);
+        return reply.status(200).send(caughtRole);
     }
 
     async list(request, reply) {

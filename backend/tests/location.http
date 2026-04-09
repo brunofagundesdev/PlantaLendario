@@ -2,32 +2,19 @@
 
 @baseUrl = http://localhost:3333
 
-@roleId = 21e6d262-e8b8-4a1a-b477-e4a08fbf37a7
-
 ### =========================
 ### GET /locations
 ### Lista todas as locations
 ### =========================
-GET {{baseUrl}}/locations
+GET {{baseUrl}}/locations/3
 Content-Type: application/json
 Authorization: Bearer {{bruninToken}}
-
-
-### =========================
-### GET /locations/:id
-### Role existente
-### =========================
-GET {{baseUrl}}/locations/{{roleId}}
-Content-Type: application/json
-Authorization: Bearer {{bruninToken}}
-
-
 
 ### =========================
 ### GET /locations/:id
 ### ID inválido (espera erro)
 ### =========================
-GET {{baseUrl}}/locations/123
+GET {{baseUrl}}/locations
 Content-Type: application/json
 Authorization: Bearer {{bruninToken}}
 
@@ -42,22 +29,30 @@ Content-Type: application/json
 Authorization: Bearer {{bruninToken}}
 
 {
-  "name": "SALA   404  ",
-  "type": "room"
+  "name": "sala 404",
+  "type": "ROoM  "
 }
 
-
-### =========================
-### POST /locations
-### Nome duplicado (espera erro)
-### =========================
+### 
 POST {{baseUrl}}/locations
 Content-Type: application/json
 Authorization: Bearer {{bruninToken}}
 
 {
-  "name": "escriba",
-  "color": "#0f2f76"
+  "name": "Pavilhão 3",
+  "type": "pavilion"
+}
+
+
+### =========================
+### GET /locations
+### =========================
+PATCH  {{baseUrl}}/locations/2
+Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
+
+{
+  "parentId": "3"
 }
 
 
@@ -65,11 +60,13 @@ Authorization: Bearer {{bruninToken}}
 ### POST /locations
 ### Body vazio (espera erro)
 ### =========================
-POST {{baseUrl}}/locations
+PATCH {{baseUrl}}/locations/2
 Content-Type: application/json
 Authorization: Bearer {{bruninToken}}
 
-{}
+{
+  "name": "sala 314"
+}
 
 
 ### =========================
@@ -84,58 +81,11 @@ Authorization: Bearer {{bruninToken}}
   "name": 123
 }
 
-
-### =========================
-### PUT /locations/:id
-### Atualiza role (completo)
-### =========================
-PUT {{baseUrl}}/locations/{{roleId}}
-Content-Type: application/json
-
-{
-  "name": "Plantaralho",
-  "color": "#1e38bd"
-}
-
-
-### =========================
-### PUT /locations/:id
-### Body incompleto (espera erro)
-### =========================
-PUT {{baseUrl}}/locations/{{roleId}}
-Content-Type: application/json
-
-{}
-
-
-### =========================
-### PATCH /locations/:id
-### Atualiza apenas o nome
-### =========================
-PATCH {{baseUrl}}/locations/{{roleId}}
-Content-Type: application/json
-
-{
-  "name": "Planta",
-  "color": "#79B822"
-}
-
-
-### =========================
-### PATCH /locations/:id
-### Body vazio (espera erro)
-### =========================
-PATCH {{baseUrl}}/locations/{{roleId}}
-Content-Type: application/json
-
-{}
-
-
 ### =========================
 ### DELETE /locations/:id
 ### Remove role existente
 ### =========================
-DELETE {{baseUrl}}/locations/{{roleId}}
+DELETE {{baseUrl}}/locations/1
 
 
 ### =========================

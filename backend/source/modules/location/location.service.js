@@ -4,7 +4,6 @@ import * as LocationErrors from "./location.error.js";
 class LocationService {
     constructor({ repository }) {
         this.repository = repository;
-        this.locationTypes = ['room', 'pavilion', 'sub', 'special', 'outside'];
     }
 
     async create({ data }) {
@@ -19,15 +18,27 @@ class LocationService {
                 throw new LocationErrors.LocationParentNotFoundError();
             }
         }
-        console.log(data)
-        // let createdLocation = await this.repository.create({ data });
-        // return createdLocation;
+
+        if (!this.locationTypes.has(data.type)) {
+            throw new LocationErrors.LocationTypeInvalidError();
+        }
+
+        let createdLocation = await this.repository.create({ data });
+        return createdLocation;
     }
 
     async get({ id }) {
-        const caughtLocation = await this.repository.get({ criteria: { id } });
+        let caughtLocation = await this.repository.get({ criteria: { id } });
         if (!caughtLocation) {
             throw new LocationErrors.LocationNotFoundError();
+        }
+        
+        if (caughtLocation.parentId) {
+            const caughtLocationParent = await this.repository.get({ criteria: { id: caughtLocation.parentId } });
+            caughtLocation = {
+                ...caughtLocation,
+                parent: caughtLocationParent
+            }
         }
         return caughtLocation;
     }
@@ -43,12 +54,25 @@ class LocationService {
             throw new LocationErrors.LocationNotFoundError();
         }
 
-        const caughtLocationByName = await this.repository.get({ criteria: { name: data.name } });
-        if (caughtLocationByName) {
-            throw new LocationErrors.LocationNameAlredyRegisteredError();
+        if (data.name !== undefined) {
+            const caughtLocationByName = await this.repository.get({ criteria: { normalizedName: data.normalizedName } });
+            if (caughtLocationByName) {
+                throw new LocationErrors.LocationNameAlredyRegisteredError();
+            }
         }
 
+        if (data.parentId !== undefined) {
+            const caughtLocationParent = await this.repository.get({ criteria: { id: data.parentId } });
+            if (!caughtLocationParent) {
+                throw new LocationErrors.LocationParentNotFoundError();
+            }
+        }
 
+        if (data.type !== undefined) {
+            if (!this.locationTypes.has(data.type)) {
+                throw new LocationErrors.LocationTypeInvalidError();
+            }
+        }
 
         let updatedLocation = await this.repository.update({ id, data });
         return updatedLocation;

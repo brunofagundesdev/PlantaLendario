@@ -19,7 +19,7 @@ class EventOptionController {
     async get(request, reply) {
         let { id } = request.params;
 
-        let sanitized = await EventOptionSanitizer.parseGet({ id });
+        let sanitized = EventOptionSanitizer.parseGet({ id });
         let caughtEventOption = await eventOptionService.get(sanitized);
 
         return reply.status(200).send(caughtEventOption);
@@ -44,10 +44,10 @@ class EventOptionController {
     async delete(request, reply) {
         let { id } = request.params;
 
-        let sanitized = await EventOptionSanitizer.parseDelete({ id });
+        let sanitized = EventOptionSanitizer.parseDelete({ id });
         let deletedEventOption = await eventOptionService.delete(sanitized);
 
-        return reply.status(204).send();
+        return reply.status(204).send(deletedEventOption);
     }
 }
 

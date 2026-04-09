@@ -2,14 +2,14 @@
 import userController from "./user.controller.js";
 
 // Middlewares
-import { ensureAuthenticated } from "../../middlewares/ensure-authenticated.middleware.js";
-import { ensureAdmin } from "../../middlewares/ensure-admin.middleware.js";
-import { ensureCanManageUser } from "../../middlewares/ensure-can-manage-user.middleware.js";
+import ensureAuthenticated from "../../middlewares/ensure-authenticated.middleware.js";
+import ensureAdmin from "../../middlewares/ensure-admin.middleware.js";
+import ensureCanManageUser from "../../middlewares/ensure-can-manage-user.middleware.js";
 
 // Roles
-import { userRoleRoute } from "../user-role/user-role.route.js";
+import userRoleRoute from "../user-role/user-role.route.js";
 
-async function userRoute(app) {
+export default async function userRoute(app) {
 
     //CRUD
     app.post("/", { preHandler: [ensureAuthenticated, ensureAdmin] }, userController.create);
@@ -21,8 +21,4 @@ async function userRoute(app) {
 
     // Roles
     app.register(userRoleRoute, { prefix: "/:userId/roles" });
-}
-
-export {
-    userRoute
 }

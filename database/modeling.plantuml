@@ -110,18 +110,25 @@ entity location {
   **id**: SERIAL <<pk>>
   --
   name: varchar(200)
-  type: varchar(50)
+  <i>type</i>: int <<fk>>
   <i>parent_id</i>: int <<fk>>
   normalized_name: varchar(200)
+}
+
+entity location_type {
+  **id**: SERIAL <<pk>>
+  --
+  name: varchar(100)
 }
 
 entity schedule {
   **id**: SERIAL <<pk>>
   --
-  <i>event</i>: UUID <<fk>>
   date: date
   <i>timetable</i>: int <<fk>>
   <i>location</i>: int <<fk>>
+  <i>event</i>: UUID <<fk>>
+  <i>lesson</i>: int <<fk>>
 }
 
 entity lesson {
@@ -172,8 +179,7 @@ entity register {
   resume: text
   date: date
   <i>location</i>: int <<fk>>
-  <i>lesson</i>: int <<fk>>
-  <i>timetable</i>: int <<fk>>
+  <i>schedule</i>: int <<fk>>
   created_at: timestamp
   <i>created_by</i>: UUID <<fk>>
 }
@@ -199,13 +205,19 @@ entity resource {
   --
   title: varchar(150)
   description: text
-  type: text
+  <i>type</i>: int <<fk>>
   <i>file</i>: UUID <<fk>>
   <i>discipline</i>: int <<fk>>
   created_at: timestamp
   <i>created_by</i>: UUID <<fk>>
   <i>updated_by</i>: UUID <<fk>>
   updated_at: timestamp
+}
+
+entity resource_type {
+  **id**: SERIAL <<pk>>
+  --
+  name: varchar(100)
 }
 
 entity discipline_teacher {
@@ -217,7 +229,6 @@ discipline ||--o{ discipline_teacher
 teacher ||--o{ discipline_teacher
 lesson }|--|| discipline
 register }o--|| location
-register |o--|| lesson 
 assessment |o--o| lesson
 
 event }o--|| event_type
@@ -261,5 +272,12 @@ event_revision }o--|| account
 
 event ||--o{ event_option_choice
 event_option ||--o{ event_option_choice
+
+location }o--|| location_type
+resource }o--|| resource_type
+
+
+lesson ||--o{ schedule
+schedule ||--o{ register
 
 @enduml

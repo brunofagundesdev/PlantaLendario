@@ -37,7 +37,7 @@ class EventSpecificationRepository {
 
     async update({ id, data }) {
         const [result] = await this.database`
-            update event_type 
+            update event_specification
             set ${data}
             where id = ${id}
             returning id;

@@ -2,7 +2,7 @@ import { JWT } from "../utils/jwt.js";
 
 import * as AuthErrors from "../auth/auth.error.js";
 
-async function ensureAuthenticated(request) {
+export default async function ensureAuthenticated(request) {
     let { authorization } = request.headers;
 
     if (!authorization) {
@@ -18,8 +18,4 @@ async function ensureAuthenticated(request) {
     let payload = JWT.verify(token);
     request.user = payload;
     // console.log(request.user)
-}
-
-export {
-    ensureAuthenticated
 }

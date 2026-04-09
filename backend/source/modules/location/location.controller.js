@@ -15,20 +15,12 @@ class LocationController {
         return reply.status(201).send(createdLocation);
     }
 
-    async delete(request, reply) {
-        let { id } = request.params;
-        let sanitized = LocationSanitizer.parseDelete({ id });
-
-        let deletedLocation = await locationService.delete(sanitized);
-        return reply.status(204).send();
-    }
-
     async get(request, reply) {
         let { id } = request.params;
         let sanitized = LocationSanitizer.parseGet({ id });
 
         let caughtLocation = await locationService.get(sanitized);
-        return reply.status(204).send(caughtLocation);
+        return reply.status(200).send(caughtLocation);
     }
 
     async list(request, reply) {
@@ -43,7 +35,14 @@ class LocationController {
         let sanitized = LocationSanitizer.parseUpdate({ id, data });
         let updatedLocation = await locationService.update(sanitized);
         return reply.status(200).send(updatedLocation);
+    }
 
+    async delete(request, reply) {
+        let { id } = request.params;
+        let sanitized = LocationSanitizer.parseDelete({ id });
+
+        let deletedLocation = await locationService.delete(sanitized);
+        return reply.status(204).send(deletedLocation);
     }
 }
 

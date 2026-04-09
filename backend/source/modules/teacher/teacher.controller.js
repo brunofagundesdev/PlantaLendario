@@ -28,7 +28,7 @@ class TeacherController {
         let sanitized = TeacherSanitizer.parseGet({ id });
 
         let caughtTeacher = await teacherService.get(sanitized);
-        return reply.status(204).send(caughtTeacher);
+        return reply.status(200).send(caughtTeacher);
     }
 
     async list(request, reply) {

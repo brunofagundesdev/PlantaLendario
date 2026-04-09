@@ -2,7 +2,7 @@ import eventTypeController from "./event-type.controller.js";
 
 import eventSpecificationController from "../specification/event-specification.controller.js";
 
-async function eventTypeRoute(app) { // /events/types
+export default async function eventTypeRoute(app) { // /events/types
 
     app.post("/", { preHandler: [] }, eventTypeController.create);
     app.get("/:id", { preHandler: [] }, eventTypeController.get);
@@ -13,8 +13,4 @@ async function eventTypeRoute(app) { // /events/types
     // Specifications
     app.get("/:typeId/specifications", { preHandler: [] }, eventSpecificationController.list);
     app.post("/:typeId/specifications", { preHandler: [] }, eventSpecificationController.create);
-}
-
-export {
-    eventTypeRoute
 }
