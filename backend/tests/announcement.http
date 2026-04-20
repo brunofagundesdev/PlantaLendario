@@ -1,0 +1,90 @@
+@bruninToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhMDRlNTNiLTdjNWUtNGM0My1iN2EzLTE0MjhjZjZlZjc5MSIsInJvbGVzIjpbeyJpZCI6IjIxZTZkMjYyLWU4YjgtNGExYS1iNDc3LWU0YTA4ZmJmMzdhNyJ9LHsiaWQiOiJjYmFmNmRjMS03MzBiLTQ5ZjctODExNS04OTZmYTY4MGNkOGEifV19.ZID1utrLbgkjScTuIRxmNJzpYQ463uNkWEger8UoZNs
+
+@baseUrl = http://localhost:3333
+
+### =========================
+### GET /announcements
+### Lista todas as announcements
+### =========================
+GET {{baseUrl}}/announcements
+Authorization: Bearer {{bruninToken}}
+
+### =========================
+### GET /announcements/:id
+### ID inválido (espera erro)
+### =========================
+GET {{baseUrl}}/announcements/5f7efc70-6dff-467d-a013-a9724fbe5666
+Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
+
+
+
+### =========================
+### POST /announcements
+### Criar role válida
+### =========================
+POST {{baseUrl}}/announcements
+Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
+
+{
+  "title": "Aulas do dia 20/04 canceladas",
+  "message": "Feriadão vai ser do bom mesmo"
+}
+
+### 
+POST {{baseUrl}}/announcements
+Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
+
+{
+  "name": "Pavilhão 3",
+  "type": "pavilion"
+}
+
+
+### =========================
+### GET /announcements
+### =========================
+PATCH  {{baseUrl}}/announcements/5f7efc70-6dff-467d-a013-a9724fbe5666
+Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
+
+{
+  "title": "Várias coisa"
+}
+
+
+### =========================
+### POST /announcements
+### Body vazio (espera erro)
+### =========================
+PATCH {{baseUrl}}/announcements/2
+Content-Type: application/json
+Authorization: Bearer {{bruninToken}}
+
+{
+  "name": "sala 314"
+}
+
+
+### =========================
+### POST /announcements
+### Campo inválido (espera erro)
+### =========================
+DELETE {{baseUrl}}/announcements/5f7efc70-6dff-467d-a013-a9724fbe5666
+Authorization: Bearer {{bruninToken}}
+
+
+### =========================
+### DELETE /announcements/:id
+### Remove role existente
+### =========================
+DELETE {{baseUrl}}/announcements/1
+
+
+### =========================
+### DELETE /announcements/:id
+### Role inexistente (espera erro)
+### =========================
+DELETE {{baseUrl}}/announcements/00000000-0000-0000-0000-000000000000

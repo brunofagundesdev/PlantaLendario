@@ -5,7 +5,7 @@ import BaseSanitizer from "../../utils/base.sanitizer.js";
 export default class AnnouncementSanitizer extends BaseSanitizer {
 
     static parseCreate({ data }) {
-        const parsed = {};
+        const parsed = { data: {} };
         parsed.data.title = this.parseTitle(data.title);
         parsed.data.message = this.parseMessage(data.message);
 
@@ -18,7 +18,7 @@ export default class AnnouncementSanitizer extends BaseSanitizer {
 
         return parsed;
     }
-
+    
     static parseUpdate({ id, data }) {
         const parsed = { data: {} };
         parsed.id = this.parseId(id);
@@ -60,8 +60,8 @@ export default class AnnouncementSanitizer extends BaseSanitizer {
         if (typeof title !== "string") {
             throw new AnnouncementErrors.AnnouncementTitleInvalidError();
         }
-        title = this.normalizeTitle(title, { accentuation: true });
-        this.validateTitle();
+        title = this.normalizeName(title, { accentuation: true });
+        this.validateTitle(title);
 
         return title;
     }
@@ -70,8 +70,8 @@ export default class AnnouncementSanitizer extends BaseSanitizer {
         if (typeof message !== "string") {
             throw new AnnouncementErrors.AnnouncementMessageInvalidError();
         }
-        message = this.normalizeMessage(message, { accentuation: true });
-        this.validateMessage();
+        message = this.normalizeName(message, { accentuation: true });
+        this.validateMessage(message);
 
         return message;
     }
@@ -79,14 +79,21 @@ export default class AnnouncementSanitizer extends BaseSanitizer {
     // ==================================================================
 
     static validateTitle(title) {
-        if (!super.validateName(title)) {
+        if (!this.validateName(title, { testNumber: true, specialChars: "/*,.!@#$%&():;" })) {
             throw new AnnouncementErrors.AnnouncementTitleInvalidError()
         }
         return;
     }
 
+    static validateMessage(message) {
+        if (!this.validateName(message, { testNumber: true, specialChars: "/*,.!@#$%&():;" })) {
+            throw new AnnouncementErrors.AnnouncementMessageInvalidError()
+        }
+        return;
+    }
+
     static validadeId(id) {
-        if (super.validateUUID(id)) {
+        if (!super.validateUUID(id)) {
             throw new AnnouncementErrors.AnnouncementIdInvalidError();
         }
         return;

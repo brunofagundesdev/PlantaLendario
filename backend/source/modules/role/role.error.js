@@ -36,7 +36,7 @@ class RoleNameAlredyRegisteredError extends AppError {
     }
 }
 
-class RoleColorAlredyUsedError extends AppError {
+class RoleColorAlredyRegisteredError extends AppError {
     constructor() {
         super("Cor de cargo já utilizada", 409);
     }
@@ -50,5 +50,5 @@ export {
     RoleColorInvalidError,
     RoleUpdateInvalidError,
     RoleNameAlredyRegisteredError,
-    RoleColorAlredyUsedError
+    RoleColorAlredyRegisteredError
 }

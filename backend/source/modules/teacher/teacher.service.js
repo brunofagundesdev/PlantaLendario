@@ -72,12 +72,11 @@ class TeacherService {
     }
 
     async delete({ id }) {
-        let caughtTeacher = await this.repository.get({ criteria: { id } });
-        if (!caughtTeacher) {
+        let deletedTeacher = await this.repository.delete({ id });
+        if (!deletedTeacher) {
             throw new TeacherErrors.TeacherNotFoundError();
         }
 
-        let deletedTeacher = await this.repository.delete({ id });
         return deletedTeacher;
     }
 }

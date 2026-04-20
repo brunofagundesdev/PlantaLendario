@@ -1,4 +1,4 @@
-import eventOptionController from "./event-specification.controller.js";
+import eventOptionController from "./event-option.controller.js";
 
 // Middlewares
 import ensureAuthenticated from "../../../middlewares/ensure-authenticated.middleware.js";

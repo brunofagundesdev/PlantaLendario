@@ -15,14 +15,6 @@ class RoleController {
         return reply.status(201).send(createdRole);
     }
 
-    async delete(request, reply) {
-        let { id } = request.params;
-        let sanitized = RoleSanitizer.parseDelete({ id });
-
-        let deletedRole = await roleService.delete(sanitized);
-        return reply.status(204).send();
-    }
-
     async get(request, reply) {
         let { id } = request.params;
         let sanitized = RoleSanitizer.parseGet({ id });
@@ -44,6 +36,14 @@ class RoleController {
         let updatedRole = await roleService.update(sanitized);
         return reply.status(200).send(updatedRole);
 
+    }
+
+    async delete(request, reply) {
+        let { id } = request.params;
+        let sanitized = RoleSanitizer.parseDelete({ id });
+
+        let deletedRole = await roleService.delete(sanitized);
+        return reply.status(204).send(deletedRole);
     }
 }
 

@@ -18,8 +18,6 @@ class DisciplineMissingTeacherError extends AppError {
     }
 }
 
-
-
 export {
     DisciplineAlreadyHasTeacherError,
     DisciplineUnauthorizedError,

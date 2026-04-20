@@ -16,14 +16,27 @@ export default class BaseSanitizer {
         return Number.isInteger(id) && id > 0;
     }
 
-    static validateName(name, { testNumber = false } = {}) {
+    /**
+     * Valida se um nome contém apenas caracteres permitidos e tem comprimento mínimo.
+     *
+     * @param {string} name - Nome a ser validado.
+     * @param {Object} [options={}]
+     * @param {boolean} [options.testNumber=false] - Se deve permitir dígitos no nome.
+     * @param {string} [options.specialChars=""] - Caracteres especiais adicionais permitidos (ex: "/*+").
+     * @returns {boolean}
+    */
+    static validateName(name, { testNumber = false, specialChars = "" } = {}) {
         if (typeof name !== "string") return false;
 
         const normalized = name.trim();
-
         if (normalized.length < 2) return false;
 
-        const chars = testNumber ? "A-Za-zÀ-ÖØ-öø-ÿ0-9" : "A-Za-zÀ-ÖØ-öø-ÿ";
+        const escaped = specialChars
+            .split("")
+            .map(c => c.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"))
+            .join("");
+
+        const chars = `A-Za-zÀ-ÖØ-öø-ÿ${testNumber ? "0-9" : ""}${escaped}`;
         const regex = new RegExp(`^[${chars}]+([ '-][${chars}]+)*$`);
 
         return regex.test(normalized);

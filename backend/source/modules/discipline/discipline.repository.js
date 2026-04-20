@@ -1,55 +1,108 @@
+/**
+ * @typedef {import('./discipline.type.js').Discipline} Discipline
+ * @typedef {import('./discipline.type.js').DisciplineCriteria} DisciplineCriteria
+*/
+
 import { database } from "../../infra/database.js";
+import CaseTransform from "../../utils/case-transform.js";
 
 class DisciplineRepository {
-    constructor({ database }) {
-        this.database = database;
-    }
 
+    /**
+     * Cria uma nova disciplina.
+     *
+     * @param {Object} params
+     * @param {Object} params.data
+     * @param {string} params.data.name
+     * @returns {Promise<Discipline>}
+    */
     async create({ data }) {
-        const result = await this.database`
-            insert into discipline ${this.database(data)}
-            returning id;
+        let [result] = await database`
+            insert into discipline ${database(CaseTransform.camelToSnake(data))}
+            returning id, name;
         `;
-        return result;
+        return CaseTransform.snakeToCamel(result);
     }
 
-    async get({ criteria }) {
-        let [result] = await this.database`
+    /**
+     * Busca uma disciplina pelo ID.
+     *
+     * @param {{ id: string }} params
+     * @returns {Promise<Discipline|null>}
+    */
+    async getById({ id }) {
+        let [result] = await database`
             select id, name
             from discipline
-            where ${this.database.buildConditions(criteria)}
+            where id = ${id}
             limit 1;
         `;
-        return result ?? null;
+        return CaseTransform.snakeToCamel(result) ?? null;
     }
 
+    /**
+     * Verifica se existe uma disciplina com base em critérios.
+     *
+     * @param {{ criteria: DisciplineCriteria }} params
+     * @returns {Promise<Boolean>}
+    */
+    async exists({ criteria }) {
+        let result = await database`
+            select 1
+            from discipline
+            where ${database.buildQuery(CaseTransform.camelToSnake(criteria))}
+            limit 1;
+        `;
+        return result.length > 0;
+    }
+
+    /**
+     * Lista todas as disciplinas.
+     *
+     * @returns {Promise<Discipline[]>}
+    */
     async list() {
-        let [result] = await this.database`
+        let result = await database`
             select id, name
             from discipline;
         `;
-        return result;
+        return CaseTransform.snakeToCamelArray(result);
     }
 
+    /**
+     * Atualiza uma disciplina.
+     *
+     * @param {Object} params
+     * @param {string} params.id
+     * @param {Object} params.data
+     * @param {string} [params.data.name]
+     * @returns {Promise<Discipline>}
+    */
     async update({ id, data }) {
-        let [result] = await this.database`
+        let [result] = await database`
             update discipline
-            set ${this.database(data)}
+            set ${database(CaseTransform.camelToSnake(data))}
             where id = ${id}
-            returning id;
+            returning id, name;
         `;
-        return result;
+        return CaseTransform.snakeToCamel(result);
     }
 
+    /**
+     * Deleta uma disciplina.
+     *
+     * @param {{ id: string }} params
+     * @returns {Promise<Boolean>}
+    */
     async delete({ id }) {
-        let [result] = await this.database`
+        let result = await database`
             delete from discipline
             where id = ${id}
             returning id;
         `;
-        return result;
+        return result.length > 0;
     }
 }
 
-const disciplineRepository = new DisciplineRepository({ database: database });
+const disciplineRepository = new DisciplineRepository();
 export default disciplineRepository;
